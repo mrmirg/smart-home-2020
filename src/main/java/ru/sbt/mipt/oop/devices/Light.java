@@ -1,6 +1,6 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.devices;
 
-public class Light {
+public class Light implements Device {
     private boolean isOn;
     private final String id;
 
@@ -13,7 +13,7 @@ public class Light {
         return isOn;
     }
 
-    public String getId() {
+    public String id() {
         return id;
     }
 

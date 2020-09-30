@@ -1,15 +1,38 @@
 package ru.sbt.mipt.oop;
 
-import com.google.gson.Gson;
+import ru.sbt.mipt.oop.events.EventGenerator;
+import ru.sbt.mipt.oop.events.EventGeneratorBuilder;
+import ru.sbt.mipt.oop.events.SensorEvent;
+import ru.sbt.mipt.oop.handlers.SensorEventHandler;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import static ru.sbt.mipt.oop.SensorEventType.*;
 
 public class Application {
 
+    // mainLoop надо выделить в отдельный класс, не успеваю
+    // logging - не успеваю
+    // commands - тоже не успел
+    // зато компилируется :)
+    private static void mainLoop(EventGenerator generator, SensorEventHandler handlerManager) {
+        for (
+                SensorEvent event = generator.nextEvent();
+                event != null;
+                event = generator.nextEvent()
+        ) {
+            handlerManager.processEvent(event);
+        }
+    }
+
+    public static void main(String... args) {
+        SmartHome smartHome = HomeBuilder.buildSampleHome();
+        SensorEventHandler handlerManager = HandlerManagerBuilder.buildDefaultManager();
+        EventGenerator eventGenerator = EventGeneratorBuilder.buildRandomGenerator(smartHome, 35);
+
+        mainLoop(eventGenerator, handlerManager);
+
+    }
+
+
+    /*
     public static void main(String... args) throws IOException {
         // считываем состояние дома из файла
         Gson gson = new Gson();
@@ -66,6 +89,8 @@ public class Application {
         }
     }
 
+
+
     private static void sendCommand(SensorCommand command) {
         System.out.println("Pretent we're sending command " + command);
     }
@@ -77,4 +102,6 @@ public class Application {
         String objectId = "" + ((int) (10 * Math.random()));
         return new SensorEvent(sensorEventType, objectId);
     }
+
+    */
 }

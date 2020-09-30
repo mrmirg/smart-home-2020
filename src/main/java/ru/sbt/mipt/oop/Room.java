@@ -1,24 +1,20 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.devices.Device;
+
 import java.util.Collection;
 
 public class Room {
-    private Collection<Light> lights;
-    private Collection<Door> doors;
+    private Collection<Device> devices;
     private String name;
 
-    public Room(Collection<Light> lights, Collection<Door> doors, String name) {
-        this.lights = lights;
-        this.doors = doors;
+    public Room(String name, Collection<Device> devices) {
+        this.devices = devices;
         this.name = name;
     }
 
-    public Collection<Light> getLights() {
-        return lights;
-    }
-
-    public Collection<Door> getDoors() {
-        return doors;
+    public Collection<Device> getDevices() {
+        return devices;
     }
 
     public String getName() {

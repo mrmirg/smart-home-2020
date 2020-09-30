@@ -2,6 +2,8 @@ package ru.sbt.mipt.oop;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import ru.sbt.mipt.oop.devices.Door;
+import ru.sbt.mipt.oop.devices.Light;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -12,6 +14,33 @@ import java.util.Arrays;
 
 public class HomeBuilder {
 
+    public static SmartHome buildSampleHome() {
+        return new SmartHome(Arrays.asList(
+                new Room("kitchen", Arrays.asList(
+                        new Light("1", false),
+                        new Light("2", true),
+                        new Door("3", false)
+                )),
+                new Room("bathroom", Arrays.asList(
+                        new Light("3", true),
+                        new Door("2", false)
+                )),
+                new Room("bedroom", Arrays.asList(
+                        new Light("4", false),
+                        new Light("5", false),
+                        new Light("6", false),
+                        new Door("3", false)
+                )),
+                new Room("hall", Arrays.asList(
+                        new Light("7", false),
+                        new Light("8", false),
+                        new Light("9", false),
+                        new Door("4", false)
+                ))
+        ));
+    }
+
+    /*
     public static void main(String[] args) throws IOException {
         Room kitchen = new Room(Arrays.asList(new Light("1", false), new Light("2", true)),
                 Arrays.asList(new Door(false, "1")),
@@ -34,5 +63,7 @@ public class HomeBuilder {
             writer.write(jsonString);
         }
     }
+
+    */
 
 }

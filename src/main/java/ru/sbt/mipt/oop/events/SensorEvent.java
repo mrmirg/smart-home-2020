@@ -1,5 +1,12 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.events;
 
+import ru.sbt.mipt.oop.devices.Device;
+
+public interface SensorEvent {
+    Device getDevice();
+}
+
+/*
 public class SensorEvent {
     private final SensorEventType type;
     private final String objectId;
@@ -25,3 +32,4 @@ public class SensorEvent {
                 '}';
     }
 }
+*/
