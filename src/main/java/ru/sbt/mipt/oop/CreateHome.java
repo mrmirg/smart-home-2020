@@ -1,0 +1,12 @@
+package ru.sbt.mipt.oop;
+
+import java.io.IOException;
+
+public class CreateHome {
+    public static void main(String[] args) throws IOException {
+        SmartHome smartHome = HomeBuilder.buildSampleHome();
+        SmartHomeIO homeIO = new SmartHomeJsonIO();
+
+        homeIO.writeHome(smartHome, "src/main/resources/samplehome.json");
+    }
+}

@@ -4,13 +4,16 @@ import ru.sbt.mipt.oop.devices.Device;
 import ru.sbt.mipt.oop.devices.Light;
 
 public class LightOffEvent implements SensorEvent {
-    private final Light device;
+    private final String deviceId;
 
-    public LightOffEvent(Light device) {
-        this.device = device;
+    public LightOffEvent(String deviceId) {
+        if (deviceId == null) {
+            throw new IllegalArgumentException("Id cannot be null.");
+        }
+        this.deviceId = deviceId;
     }
 
-    public Device getDevice() {
-        return device;
+    public String getDeviceId() {
+        return deviceId;
     }
 }

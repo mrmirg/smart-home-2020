@@ -1,24 +1,33 @@
 package ru.sbt.mipt.oop.handlers;
 
+import ru.sbt.mipt.oop.SmartHome;
+import ru.sbt.mipt.oop.devices.Device;
 import ru.sbt.mipt.oop.devices.Light;
-import ru.sbt.mipt.oop.events.LightOffEvent;
-import ru.sbt.mipt.oop.events.LightOnEvent;
-import ru.sbt.mipt.oop.events.SensorEvent;
+import ru.sbt.mipt.oop.events.*;
 
 public class LightHandler implements SensorEventHandler {
+    SmartHome smartHome;
+
+    public LightHandler(SmartHome home) {
+        this.smartHome = home;
+    }
 
     public boolean processEvent(SensorEvent event) {
-        if (event instanceof LightOnEvent) {
-            LightOnEvent lightEvent = (LightOnEvent) event;
-            Light lightDevice = (Light) lightEvent.getDevice();
-            lightDevice.setOn(true);
-            return true;
-        }
-        if (event instanceof LightOffEvent) {
-            LightOffEvent lightEvent = (LightOffEvent) event;
-            Light lightDevice = (Light) lightEvent.getDevice();
-            lightDevice.setOn(false);
-            return true;
+        if (event instanceof LightOnEvent || event instanceof LightOffEvent) {
+            Device device = smartHome.getDeviceById(event.getDeviceId());
+            if (device instanceof Light) {
+                Light lightDevice = (Light) device;
+                boolean lightOn = event instanceof LightOnEvent;
+                lightDevice.setOn(lightOn);
+
+                System.out.println(
+                        "Light set to " + device.getId() + (lightOn ? " ON " : " OFF ") + "successfully"
+                );
+                return true;
+            } else {
+                System.out.println("Failed to process : device " + (device == null ? "null" : device.getId()) + " is not a Light");
+                return false;
+            }
         }
         return false;
     }

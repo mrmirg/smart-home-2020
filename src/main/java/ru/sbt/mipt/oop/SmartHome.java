@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.devices.Device;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -20,5 +22,16 @@ public class SmartHome {
 
     public Collection<Room> getRooms() {
         return rooms;
+    }
+
+    public Device getDeviceById(String id) {
+        for (Room room : rooms) {
+            for (Device device : room.getDevices()) {
+                if (device.getId().equals(id)) {
+                    return device;
+                }
+            }
+        }
+        return null;
     }
 }

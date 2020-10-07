@@ -1,16 +1,21 @@
 package ru.sbt.mipt.oop;
 
 import ru.sbt.mipt.oop.handlers.DoorHandler;
-import ru.sbt.mipt.oop.handlers.HandlerManager;
 import ru.sbt.mipt.oop.handlers.LightHandler;
 
 import java.util.Arrays;
 
 public class HandlerManagerBuilder {
-    public static HandlerManager buildDefaultManager() {
-        return new HandlerManager(Arrays.asList(
-                new DoorHandler(),
-                new LightHandler()
+    private SmartHome smartHome;
+
+    public HandlerManagerBuilder(SmartHome smartHome) {
+        this.smartHome = smartHome;
+    }
+
+    public HandlerManager buildDefaultManager() {
+        return new HandlerManagerImpl(Arrays.asList(
+                new DoorHandler(smartHome),
+                new LightHandler(smartHome)
         ));
     }
 }

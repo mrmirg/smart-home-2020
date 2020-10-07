@@ -5,8 +5,8 @@ import ru.sbt.mipt.oop.devices.Device;
 import java.util.Collection;
 
 public class Room {
-    private Collection<Device> devices;
-    private String name;
+    private final Collection<Device> devices;
+    private final String name;
 
     public Room(String name, Collection<Device> devices) {
         this.devices = devices;

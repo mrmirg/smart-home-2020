@@ -1,0 +1,76 @@
+{
+  "rooms": [
+    {
+      "devices": [
+        {
+          "isOn": false,
+          "id": "1"
+        },
+        {
+          "isOn": true,
+          "id": "2"
+        },
+        {
+          "id": "3",
+          "isOpen": false
+        }
+      ],
+      "name": "kitchen"
+    },
+    {
+      "devices": [
+        {
+          "isOn": true,
+          "id": "4"
+        },
+        {
+          "id": "5",
+          "isOpen": false
+        }
+      ],
+      "name": "bathroom"
+    },
+    {
+      "devices": [
+        {
+          "isOn": false,
+          "id": "6"
+        },
+        {
+          "isOn": false,
+          "id": "7"
+        },
+        {
+          "isOn": false,
+          "id": "8"
+        },
+        {
+          "id": "9",
+          "isOpen": false
+        }
+      ],
+      "name": "bedroom"
+    },
+    {
+      "devices": [
+        {
+          "isOn": false,
+          "id": "10"
+        },
+        {
+          "isOn": false,
+          "id": "11"
+        },
+        {
+          "isOn": false,
+          "id": "12"
+        },
+        {
+          "id": "13",
+          "isOpen": false
+        }
+      ],
+      "name": "hall"
+    }
+  ]
+}

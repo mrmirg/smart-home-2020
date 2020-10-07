@@ -13,7 +13,7 @@ public class Light implements Device {
         return isOn;
     }
 
-    public String id() {
+    public String getId() {
         return id;
     }
 

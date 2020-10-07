@@ -9,7 +9,7 @@ public class Door implements Device {
         this.id = id;
     }
 
-    public String id() {
+    public String getId() {
         return id;
     }
 

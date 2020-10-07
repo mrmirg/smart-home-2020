@@ -1,17 +1,18 @@
 package ru.sbt.mipt.oop.events;
 
-import ru.sbt.mipt.oop.devices.Device;
-import ru.sbt.mipt.oop.devices.Door;
 
 public class DoorOpenedEvent implements SensorEvent {
-    private final Door device;
+    private final String deviceId;
 
-    public DoorOpenedEvent(Door device) {
-        this.device = device;
+    public DoorOpenedEvent(String deviceId) {
+        if (deviceId == null) {
+            throw new IllegalArgumentException("Id cannot be null.");
+        }
+        this.deviceId = deviceId;
     }
 
-    public Device getDevice() {
-        return device;
+    public String getDeviceId() {
+        return deviceId;
     }
 
 
