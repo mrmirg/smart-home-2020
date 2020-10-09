@@ -2,14 +2,15 @@ package ru.sbt.mipt.smarthome;
 
 import ru.sbt.mipt.smarthome.events.EventGenerator;
 import ru.sbt.mipt.smarthome.events.SensorEvent;
+import ru.sbt.mipt.smarthome.handlers.SensorEventHandler;
 
 public class EventLoop {
     private final EventGenerator eventGenerator;
-    private final HandlerManager handlerManager;
+    private final SensorEventHandler sensorEventHandler;
 
-    public EventLoop(EventGenerator eventGenerator, HandlerManager handlerManager) {
+    public EventLoop(EventGenerator eventGenerator, SensorEventHandler sensorEventHandler) {
         this.eventGenerator = eventGenerator;
-        this.handlerManager = handlerManager;
+        this.sensorEventHandler = sensorEventHandler;
     }
 
     public void spin() {
@@ -18,7 +19,7 @@ public class EventLoop {
                 event != null;
                 event = eventGenerator.nextEvent()
         ) {
-            handlerManager.processEvent(event);
+            sensorEventHandler.processEvent(event);
         }
     }
 }

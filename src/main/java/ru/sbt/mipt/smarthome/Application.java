@@ -3,6 +3,7 @@ package ru.sbt.mipt.smarthome;
 import ru.sbt.mipt.smarthome.components.SmartHome;
 import ru.sbt.mipt.smarthome.events.EventGenerator;
 import ru.sbt.mipt.smarthome.events.RandomEventGeneratorBuilderWithIntIds;
+import ru.sbt.mipt.smarthome.handlers.SensorEventHandler;
 
 import java.io.IOException;
 
@@ -21,10 +22,10 @@ public class Application {
 
         EventGenerator eventGenerator = new RandomEventGeneratorBuilderWithIntIds(0, 13)
                 .buildRandomGenerator(100);
-        HandlerManager handlerManager = new HandlerManagerBuilder(smartHome)
+        SensorEventHandler sensorEventHandler = new CompositeHandlerBuilder(smartHome)
                 .buildDefaultManager();
 
-        EventLoop eventLoop = new EventLoop(eventGenerator, handlerManager);
+        EventLoop eventLoop = new EventLoop(eventGenerator, sensorEventHandler);
         eventLoop.spin();
     }
 }

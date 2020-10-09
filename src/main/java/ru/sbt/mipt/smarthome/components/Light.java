@@ -13,6 +13,7 @@ public class Light implements HomeComponent {
         return isOn;
     }
 
+    @Override
     public String getId() {
         return id;
     }

@@ -10,6 +10,7 @@ public class LightOff implements SensorEvent {
         this.deviceId = deviceId;
     }
 
+    @Override
     public String getComponentId() {
         return deviceId;
     }

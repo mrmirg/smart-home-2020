@@ -9,6 +9,7 @@ public class Door implements HomeComponent {
         this.id = id;
     }
 
+    @Override
     public String getId() {
         return id;
     }

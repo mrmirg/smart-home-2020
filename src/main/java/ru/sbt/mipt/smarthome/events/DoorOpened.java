@@ -11,6 +11,7 @@ public class DoorOpened implements SensorEvent {
         this.deviceId = deviceId;
     }
 
+    @Override
     public String getComponentId() {
         return deviceId;
     }

@@ -16,6 +16,7 @@ public class Room implements HomeComponent, Actionable {
         this.id = id;
     }
 
+    @Override
     public String getId() {
         return id;
     }
@@ -24,6 +25,7 @@ public class Room implements HomeComponent, Actionable {
         return name;
     }
 
+    @Override
     public boolean applyAction(Action action) {
         boolean result = false;
         for (HomeComponent component : components) {

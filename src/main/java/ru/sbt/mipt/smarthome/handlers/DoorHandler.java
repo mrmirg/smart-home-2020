@@ -13,6 +13,7 @@ public class DoorHandler implements SensorEventHandler {
         this.smartHome = home;
     }
 
+    @Override
     public boolean processEvent(SensorEvent event) {
         if (event instanceof DoorOpened || event instanceof DoorClosed) {
             boolean opened = event instanceof DoorOpened;

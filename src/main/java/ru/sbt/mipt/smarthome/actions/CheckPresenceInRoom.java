@@ -11,6 +11,7 @@ public class CheckPresenceInRoom implements Action {
         this.componentId = componentId;
     }
 
+    @Override
     public boolean act(HomeComponent component) {
         if (component instanceof Room) {
             return ((Room) component).applyAction(this);

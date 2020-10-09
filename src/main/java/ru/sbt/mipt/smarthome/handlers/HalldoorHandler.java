@@ -16,6 +16,7 @@ public class HalldoorHandler implements SensorEventHandler {
         this.halldoorId = halldoorId;
     }
 
+    @Override
     public boolean processEvent(SensorEvent event) {
         if ((event instanceof DoorOpened
                 || event instanceof DoorClosed)

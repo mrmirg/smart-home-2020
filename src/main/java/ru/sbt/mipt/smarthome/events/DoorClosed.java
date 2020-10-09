@@ -11,6 +11,7 @@ public class DoorClosed implements SensorEvent {
         this.deviceId = deviceId;
     }
 
+    @Override
     public String getComponentId() {
         return deviceId;
     }

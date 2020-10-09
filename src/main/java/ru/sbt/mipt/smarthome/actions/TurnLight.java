@@ -16,6 +16,7 @@ public class TurnLight implements Action {
         this.componentId = componentId;
     }
 
+    @Override
     public boolean act(HomeComponent component) {
         if (component instanceof Light && componentId.equals(component.getId())) {
             ((Light) component).setOn(lightOn);

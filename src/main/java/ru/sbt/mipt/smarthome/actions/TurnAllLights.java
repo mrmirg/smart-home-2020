@@ -11,6 +11,7 @@ public class TurnAllLights implements Action {
         this.lightOn = lightOn;
     }
 
+    @Override
     public boolean act(HomeComponent component) {
         if (component instanceof Light) {
             ((Light) component).setOn(lightOn);

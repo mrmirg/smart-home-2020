@@ -24,10 +24,12 @@ public class SmartHome implements HomeComponent, Actionable {
         components.add(component);
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public boolean applyAction(Action action) {
         boolean result = false;
         for (HomeComponent component : components) {

@@ -10,6 +10,7 @@ public class LightOn implements SensorEvent {
         this.deviceId = deviceId;
     }
 
+    @Override
     public String getComponentId() {
         return deviceId;
     }

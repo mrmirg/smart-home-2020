@@ -16,6 +16,7 @@ public class OpenCloseDoor implements Action {
         this.componentId = componentId;
     }
 
+    @Override
     public boolean act(HomeComponent component) {
         if (component instanceof Door && componentId.equals(component.getId())) {
             ((Door) component).setOpen(opened);

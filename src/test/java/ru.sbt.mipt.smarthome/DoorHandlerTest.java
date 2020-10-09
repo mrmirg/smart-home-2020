@@ -56,6 +56,4 @@ public class DoorHandlerTest {
         assertTrue(door.isOpened());
         assertFalse(light.isOn());
     }
-
-
 }

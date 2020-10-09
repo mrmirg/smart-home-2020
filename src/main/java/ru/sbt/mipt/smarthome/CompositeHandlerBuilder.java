@@ -1,20 +1,22 @@
 package ru.sbt.mipt.smarthome;
 
 import ru.sbt.mipt.smarthome.components.SmartHome;
+import ru.sbt.mipt.smarthome.handlers.CompositeEventHandler;
 import ru.sbt.mipt.smarthome.handlers.DoorHandler;
 import ru.sbt.mipt.smarthome.handlers.LightHandler;
+import ru.sbt.mipt.smarthome.handlers.SensorEventHandler;
 
 import java.util.Arrays;
 
-public class HandlerManagerBuilder {
+public class CompositeHandlerBuilder {
     private SmartHome smartHome;
 
-    public HandlerManagerBuilder(SmartHome smartHome) {
+    public CompositeHandlerBuilder(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
 
-    public HandlerManager buildDefaultManager() {
-        return new HandlerManagerImpl(Arrays.asList(
+    public SensorEventHandler buildDefaultManager() {
+        return new CompositeEventHandler(Arrays.asList(
                 new DoorHandler(smartHome),
                 new LightHandler(smartHome)
         ));

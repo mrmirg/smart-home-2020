@@ -16,6 +16,7 @@ public class RandomEventGenerator implements EventGenerator {
         randomGenerator = new Random();
     }
 
+    @Override
     public SensorEvent nextEvent() {
         if (iterCount == curIterCount) {
             return null;

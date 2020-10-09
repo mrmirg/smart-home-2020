@@ -13,6 +13,7 @@ public class TurnAllLightsInRoomWithComponent implements Action {
         this.lightOn = lightOn;
     }
 
+    @Override
     public boolean act(HomeComponent component) {
         // Если component - это Actionable и не Room
         // то пробрасываем Action во внут. структуру

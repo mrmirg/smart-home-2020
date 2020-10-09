@@ -14,6 +14,7 @@ public class LightHandler implements SensorEventHandler {
         this.smartHome = home;
     }
 
+    @Override
     public boolean processEvent(SensorEvent event) {
         if (event instanceof LightOn || event instanceof LightOff) {
             boolean lightOn = event instanceof LightOn;
