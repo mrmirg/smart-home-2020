@@ -1,11 +1,13 @@
 package ru.sbt.mipt.smarthome.handlers;
 
+
 import ru.sbt.mipt.smarthome.actions.OpenCloseDoor;
 import ru.sbt.mipt.smarthome.actions.TurnAllLightsInRoomWithComponent;
 import ru.sbt.mipt.smarthome.components.SmartHome;
 import ru.sbt.mipt.smarthome.events.DoorClosed;
 import ru.sbt.mipt.smarthome.events.DoorOpened;
 import ru.sbt.mipt.smarthome.events.SensorEvent;
+
 
 public class HalldoorHandler implements SensorEventHandler {
     private final SmartHome smartHome;
@@ -15,6 +17,7 @@ public class HalldoorHandler implements SensorEventHandler {
         this.smartHome = home;
         this.halldoorId = halldoorId;
     }
+
 
     @Override
     public boolean processEvent(SensorEvent event) {

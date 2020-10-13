@@ -1,5 +1,6 @@
 package ru.sbt.mipt.smarthome.test;
 
+
 import org.junit.jupiter.api.Test;
 import ru.sbt.mipt.smarthome.components.Door;
 import ru.sbt.mipt.smarthome.components.Light;
@@ -8,7 +9,6 @@ import ru.sbt.mipt.smarthome.components.SmartHome;
 import ru.sbt.mipt.smarthome.events.DoorClosed;
 import ru.sbt.mipt.smarthome.events.DoorOpened;
 import ru.sbt.mipt.smarthome.handlers.HalldoorHandler;
-
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,6 +53,7 @@ public class HalldoorHandlerTest {
         assertFalse(anotherDoor.isOpened());
         assertFalse(anotherLight.isOn());
     }
+
 
     @Test
     public void openInvalidHalldoor() {

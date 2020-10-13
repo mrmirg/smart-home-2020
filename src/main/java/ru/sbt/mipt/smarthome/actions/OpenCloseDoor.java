@@ -4,7 +4,8 @@ import ru.sbt.mipt.smarthome.Actionable;
 import ru.sbt.mipt.smarthome.components.HomeComponent;
 import ru.sbt.mipt.smarthome.components.Door;
 
-public class OpenCloseDoor implements Action {
+public class
+OpenCloseDoor implements Action {
     private final boolean opened;
     private final String componentId;
 

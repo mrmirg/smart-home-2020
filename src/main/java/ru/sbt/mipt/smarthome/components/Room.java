@@ -10,20 +10,24 @@ public class Room implements HomeComponent, Actionable {
     private final String name;
     private final String id;
 
+
     public Room(String name, String id, Collection<HomeComponent> homeComponents) {
         this.components = homeComponents;
         this.name = name;
         this.id = id;
     }
 
+
     @Override
     public String getId() {
         return id;
     }
 
+
     public String getName() {
         return name;
     }
+
 
     @Override
     public boolean applyAction(Action action) {

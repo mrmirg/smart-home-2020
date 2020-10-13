@@ -1,10 +1,10 @@
 package ru.sbt.mipt.smarthome;
 
+
 import ru.sbt.mipt.smarthome.components.SmartHome;
 import ru.sbt.mipt.smarthome.events.EventGenerator;
 import ru.sbt.mipt.smarthome.events.RandomEventGeneratorBuilderWithIntIds;
 import ru.sbt.mipt.smarthome.handlers.SensorEventHandler;
-
 import java.io.IOException;
 
 
@@ -12,7 +12,6 @@ public class Application {
     public static void main(String... args) {
         SmartHomeIO smartHomeIO = new SmartHomeJsonIO();
         SmartHome smartHome;
-
         try {
             smartHome = smartHomeIO.readHome("src/resources/smarthome.json");
         } catch (IOException e) {
@@ -23,7 +22,7 @@ public class Application {
         EventGenerator eventGenerator = new RandomEventGeneratorBuilderWithIntIds(0, 13)
                 .buildRandomGenerator(100);
         SensorEventHandler sensorEventHandler = new CompositeHandlerBuilder(smartHome)
-                .buildDefaultManager();
+                .buildDefault();
 
         EventLoop eventLoop = new EventLoop(eventGenerator, sensorEventHandler);
         eventLoop.spin();

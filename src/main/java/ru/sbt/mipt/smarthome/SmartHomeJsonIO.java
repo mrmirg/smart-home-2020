@@ -1,5 +1,6 @@
 package ru.sbt.mipt.smarthome;
 
+
 import com.google.gson.*;
 
 import ru.sbt.mipt.smarthome.components.HomeComponent;
@@ -21,6 +22,7 @@ public class SmartHomeJsonIO implements SmartHomeIO {
         this.json = new GsonBuilder().setPrettyPrinting().create();
     }
 
+
     public void writeHome(SmartHome smartHome, String path) throws IOException {
         if (smartHome == null) {
             throw new IllegalArgumentException("smartHome must be non-null");
@@ -31,6 +33,7 @@ public class SmartHomeJsonIO implements SmartHomeIO {
         writer.write(jsonString);
         writer.flush();
     }
+
 
     public SmartHome readHome(String path) throws IOException {
         String jsonString = new String(Files.readAllBytes(Paths.get(path)));

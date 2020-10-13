@@ -9,12 +9,14 @@ public class RandomEventGenerator implements EventGenerator {
     private final int iterCount;
     private int curIterCount;
 
+
     public RandomEventGenerator(ArrayList<SensorEvent> events, int iterCount) {
         this.events = events;
         this.iterCount = iterCount;
         this.curIterCount = 0;
         randomGenerator = new Random();
     }
+
 
     @Override
     public SensorEvent nextEvent() {
