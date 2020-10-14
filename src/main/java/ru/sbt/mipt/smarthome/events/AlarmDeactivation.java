@@ -1,5 +1,6 @@
 package ru.sbt.mipt.smarthome.events;
 
+
 public class AlarmDeactivation implements SensorEvent {
     private final String alarmId;
     private final String fingerPrint;

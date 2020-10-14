@@ -29,7 +29,8 @@ public class HalldoorHandlerTest {
         Room anotherRoom = new Room("bedroom", "b", Arrays.asList(anotherDoor, anotherLight));
 
         SmartHome smartHome  = new SmartHome("supersmart", Arrays.asList(room, anotherRoom));
-        HalldoorHandler halldoorHandler = new HalldoorHandler(smartHome, halldoor.getId());
+        HalldoorHandler halldoorHandler = new HalldoorHandler(room, halldoor.getId());
+
 
         // when
         boolean successOpen = halldoorHandler.processEvent(new DoorOpened(halldoor.getId()));
@@ -38,8 +39,6 @@ public class HalldoorHandlerTest {
         assertTrue(successOpen);
         assertTrue(light1.isOn());
         assertTrue(light2.isOn());
-        assertTrue(halldoor.isOpened());
-        assertFalse(anotherDoor.isOpened());
         assertFalse(anotherLight.isOn());
 
         // when
@@ -69,7 +68,7 @@ public class HalldoorHandlerTest {
         Room anotherRoom = new Room("bedroom", "b", Arrays.asList(anotherDoor, anotherLight));
 
         SmartHome smartHome  = new SmartHome("supersmart", Arrays.asList(room, anotherRoom));
-        HalldoorHandler halldoorHandler = new HalldoorHandler(smartHome, halldoor.getId());
+        HalldoorHandler halldoorHandler = new HalldoorHandler(room, halldoor.getId());
 
         // when
         boolean successOpen = halldoorHandler.processEvent(new DoorOpened("bla"));

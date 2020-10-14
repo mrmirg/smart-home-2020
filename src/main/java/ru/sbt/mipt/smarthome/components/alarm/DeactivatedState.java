@@ -1,5 +1,6 @@
 package ru.sbt.mipt.smarthome.components.alarm;
 
+
 public class DeactivatedState implements AlarmState {
     private final Alarm alarm;
 

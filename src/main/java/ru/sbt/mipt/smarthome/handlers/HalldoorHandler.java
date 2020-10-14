@@ -1,34 +1,37 @@
 package ru.sbt.mipt.smarthome.handlers;
 
 
-import ru.sbt.mipt.smarthome.actions.OpenCloseDoor;
-import ru.sbt.mipt.smarthome.actions.TurnAllLightsInRoomWithComponent;
-import ru.sbt.mipt.smarthome.components.SmartHome;
+import ru.sbt.mipt.smarthome.actions.CheckObjectPresence;
+import ru.sbt.mipt.smarthome.actions.TurnAllLights;
+import ru.sbt.mipt.smarthome.components.Room;
 import ru.sbt.mipt.smarthome.events.DoorClosed;
 import ru.sbt.mipt.smarthome.events.DoorOpened;
 import ru.sbt.mipt.smarthome.events.SensorEvent;
 
 
 public class HalldoorHandler implements SensorEventHandler {
-    private final SmartHome smartHome;
-    private final String halldoorId;
+    private final Room hallRoom;
+    private final String hallDoorId;
 
-    public HalldoorHandler(SmartHome home, String halldoorId) {
-        this.smartHome = home;
-        this.halldoorId = halldoorId;
+    public HalldoorHandler(Room hallRoom, String hallDoorId) {
+        if (!hallRoom.applyAction(new CheckObjectPresence(hallDoorId))) {
+            throw new IllegalStateException("Hall room does not contain this door!");
+        }
+        this.hallRoom = hallRoom;
+        this.hallDoorId = hallDoorId;
     }
 
 
+    // Если парадная дверь открылась, то включаем свет, и vice versa
+    // этот обработчик только включит свет в холле, за обработку открытия двери отвечает DoorHandler
     @Override
     public boolean processEvent(SensorEvent event) {
         if ((event instanceof DoorOpened
                 || event instanceof DoorClosed)
-                && halldoorId.equals(event.getComponentId())
+                && hallDoorId.equals(event.getComponentId())
         ) {
             boolean opened = event instanceof DoorOpened;
-            // Если парадная дверь открылась, то включаем свет, и vice versa
-            return smartHome.applyAction(new TurnAllLightsInRoomWithComponent(halldoorId, opened)) &&
-                    smartHome.applyAction(new OpenCloseDoor(halldoorId, opened)); // и обновляем состояние двери
+            return hallRoom.applyAction(new TurnAllLights(opened));
         }
         return false;
     }

@@ -1,5 +1,6 @@
 package ru.sbt.mipt.smarthome.components.alarm;
 
+
 public class EmergencyState implements AlarmState {
     public EmergencyState(Alarm alarm) {
         if (alarm == null) {

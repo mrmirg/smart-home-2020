@@ -2,13 +2,9 @@ package ru.sbt.mipt.smarthome;
 
 
 import com.google.gson.*;
-
-import ru.sbt.mipt.smarthome.components.HomeComponent;
 import ru.sbt.mipt.smarthome.components.SmartHome;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

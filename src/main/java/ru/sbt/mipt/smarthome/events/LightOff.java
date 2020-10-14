@@ -1,5 +1,6 @@
 package ru.sbt.mipt.smarthome.events;
 
+
 public class LightOff implements SensorEvent {
     private final String deviceId;
 

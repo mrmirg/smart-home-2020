@@ -1,5 +1,6 @@
 package ru.sbt.mipt.smarthome.components;
 
+
 public class Light implements HomeComponent {
     private boolean isOn;
     private final String id;
@@ -9,6 +10,7 @@ public class Light implements HomeComponent {
         this.id = id;
         this.isOn = isOn;
     }
+
 
     public boolean isOn() {
         return isOn;

@@ -1,5 +1,6 @@
 package ru.sbt.mipt.smarthome.components;
 
+
 public class Door implements HomeComponent {
     private final String id;
     private boolean isOpen;

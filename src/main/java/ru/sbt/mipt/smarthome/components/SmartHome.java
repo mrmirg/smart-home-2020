@@ -1,10 +1,11 @@
 package ru.sbt.mipt.smarthome.components;
 
+
 import ru.sbt.mipt.smarthome.actions.Action;
 import ru.sbt.mipt.smarthome.Actionable;
-
 import java.util.ArrayList;
 import java.util.Collection;
+
 
 public class SmartHome implements HomeComponent, Actionable {
     private final Collection<HomeComponent> components;
@@ -38,6 +39,9 @@ public class SmartHome implements HomeComponent, Actionable {
     public boolean applyAction(Action action) {
         boolean result = false;
         for (HomeComponent component : components) {
+            if (component instanceof Actionable) {
+                result |= ((Actionable) component).applyAction(action);
+            }
             result |= action.act(component);
         }
         return result;
