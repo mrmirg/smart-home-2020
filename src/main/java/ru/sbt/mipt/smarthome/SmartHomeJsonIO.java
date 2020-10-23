@@ -31,8 +31,14 @@ public class SmartHomeJsonIO implements SmartHomeIO {
     }
 
 
-    public SmartHome readHome(String path) throws IOException {
-        String jsonString = new String(Files.readAllBytes(Paths.get(path)));
-        return json.fromJson(jsonString, SmartHome.class);
+    public SmartHome readHome(String path) {
+        SmartHome smartHome = null;
+        try {
+            String jsonString = new String(Files.readAllBytes(Paths.get(path)));
+            smartHome = json.fromJson(jsonString, SmartHome.class);
+        } catch (IOException e) {
+            System.out.println("Failed to deserialize smartHome\nNo idea what to do with this\n" + e.getMessage());
+        }
+        return smartHome;
     }
 }

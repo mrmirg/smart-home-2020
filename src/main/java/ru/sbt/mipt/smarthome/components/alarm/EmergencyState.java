@@ -2,10 +2,13 @@ package ru.sbt.mipt.smarthome.components.alarm;
 
 
 public class EmergencyState implements AlarmState {
+    private final Alarm alarm;
+
     public EmergencyState(Alarm alarm) {
         if (alarm == null) {
             throw new IllegalArgumentException("Alarm object must be non null");
         }
+        this.alarm = alarm;
     }
 
 
@@ -17,7 +20,11 @@ public class EmergencyState implements AlarmState {
 
     @Override
     public boolean setDeactivated(String alarmFingerprint) {
-        return false;
+        boolean isFPValid = alarm.getFingerPrint().equals(alarmFingerprint);
+        if (isFPValid) {
+            alarm.setAlarmState(new DeactivatedState(alarm));
+        }
+        return isFPValid;
     }
 
 

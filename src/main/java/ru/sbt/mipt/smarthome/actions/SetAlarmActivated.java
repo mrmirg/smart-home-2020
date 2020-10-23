@@ -21,8 +21,8 @@ public class SetAlarmActivated implements Action {
     @Override
     public boolean act(HomeComponent component) {
         if (component instanceof Alarm && alarmId.equals(component.getId())) {
-            return activate ? ((Alarm) component).setActivated(fingerPrint) :
-                              ((Alarm) component).setDeactivated(fingerPrint);
+            return activate ? ((Alarm) component).getAlarmState().setActivated(fingerPrint) :
+                              ((Alarm) component).getAlarmState().setDeactivated(fingerPrint);
         }
         return false;
     }

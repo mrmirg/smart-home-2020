@@ -2,16 +2,11 @@ package ru.sbt.mipt.smarthome.components.alarm;
 
 import ru.sbt.mipt.smarthome.components.HomeComponent;
 
-public class Alarm implements HomeComponent, AlarmState {
+public class Alarm implements HomeComponent {
     private final String id;
     private String fingerPrint;
-    private AlarmState alarmState;
     private boolean superMegaLoudAlarmNotifier;
-
-
-    void enableAlarmNotifier(boolean enable) {
-        superMegaLoudAlarmNotifier = enable;
-    }
+    private AlarmState alarmState;
 
 
     boolean isAlarmNotifierEnabled() {
@@ -24,11 +19,21 @@ public class Alarm implements HomeComponent, AlarmState {
     }
 
 
+    void enableAlarmNotifier(boolean enable) {
+        superMegaLoudAlarmNotifier = enable;
+    }
+
+
     void setFingerPrint(String fingerPrint) {
         if (fingerPrint == null) {
             throw new IllegalArgumentException();
         }
         this.fingerPrint = fingerPrint;
+    }
+
+
+    public AlarmState getState() {
+        return alarmState;
     }
 
 
@@ -46,32 +51,6 @@ public class Alarm implements HomeComponent, AlarmState {
 
     public AlarmState getAlarmState() {
         return alarmState;
-    }
-
-
-    @Override
-    public boolean setActivated(String alarmFingerprint) {
-        return alarmState.setActivated(alarmFingerprint);
-    }
-
-
-    @Override
-    public boolean setDeactivated(String alarmFingerprint) {
-        boolean success = alarmState.setDeactivated(alarmFingerprint);
-        if (success) {
-            enableAlarmNotifier(false);
-        }
-        return success;
-    }
-
-
-    @Override
-    public boolean setEmergency() {
-        boolean success = alarmState.setEmergency();
-        if (success) {
-            enableAlarmNotifier(true);
-        }
-        return success;
     }
 
 

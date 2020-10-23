@@ -113,9 +113,9 @@ public class AlarmTest {
         assertTrue(successActivated);
         assertFalse(successDeactivated);
         assertFalse(successDeactivated1);
-        assertFalse(successDeactivated2);
+        assertTrue(successDeactivated2);
         assertTrue(isEmergency);
         assertTrue(isEmergency1);
-        assertTrue(isEmergency2);
+        assertFalse(isEmergency2);
     }
 }

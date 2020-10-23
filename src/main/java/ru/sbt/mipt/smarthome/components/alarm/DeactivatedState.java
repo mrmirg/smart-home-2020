@@ -26,16 +26,13 @@ public class DeactivatedState implements AlarmState {
 
     @Override
     public boolean setDeactivated(String alarmFingerprint) {
-        boolean isFPValid = alarm.getFingerPrint().equals(alarmFingerprint);
-        if (isFPValid) {
-            alarm.setAlarmState(new DeactivatedState(alarm));
-        }
-        return isFPValid;
+        return false;
     }
 
 
     @Override
     public boolean setEmergency() {
-        return false;
+        alarm.setAlarmState(new EmergencyState(alarm));
+        return true;
     }
 }

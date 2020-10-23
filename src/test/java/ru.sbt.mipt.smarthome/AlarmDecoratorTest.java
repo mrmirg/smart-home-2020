@@ -9,7 +9,8 @@ import ru.sbt.mipt.smarthome.components.alarm.DeactivatedState;
 import ru.sbt.mipt.smarthome.components.alarm.EmergencyState;
 import ru.sbt.mipt.smarthome.events.DoorOpened;
 import ru.sbt.mipt.smarthome.events.LightOn;
-import ru.sbt.mipt.smarthome.handlers.SensorEventHandler;
+import ru.sbt.mipt.smarthome.handlers.*;
+
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -28,7 +29,15 @@ public class AlarmDecoratorTest {
         Alarm alarm = new Alarm("alarm0");
         SmartHome smartHome = new SmartHome("strangehome", Arrays.asList(atticRoom, alarm));
 
-        SensorEventHandler eventHandler = new CompositeHandlerBuilder(smartHome).buildDefaultWithAlarm("alarm0");
+        SensorEventHandler eventHandler = new AlarmDecorator(
+                smartHome,
+                alarm.getId(),
+                new CompositeEventHandler(Arrays.asList(
+                        new DoorHandler(smartHome),
+                        new LightHandler(smartHome),
+                        new AlarmHandler(smartHome)
+                ))
+        );
 
         // when
         boolean doorOpened = eventHandler
@@ -54,7 +63,15 @@ public class AlarmDecoratorTest {
         Alarm alarm = new Alarm("alarm0");
         SmartHome smartHome = new SmartHome("strangehome", Arrays.asList(atticRoom, alarm));
 
-        SensorEventHandler eventHandler = new CompositeHandlerBuilder(smartHome).buildDefaultWithAlarm("alarm0");
+        SensorEventHandler eventHandler = new AlarmDecorator(
+                smartHome,
+                alarm.getId(),
+                new CompositeEventHandler(Arrays.asList(
+                        new DoorHandler(smartHome),
+                        new LightHandler(smartHome),
+                        new AlarmHandler(smartHome)
+                ))
+        );
         smartHome.applyAction(new SetAlarmActivated("alarm0", "very_safe_password", true));
 
         // when

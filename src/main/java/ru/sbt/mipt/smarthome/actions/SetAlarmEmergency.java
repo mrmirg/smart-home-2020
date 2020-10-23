@@ -17,7 +17,7 @@ public class SetAlarmEmergency implements Action {
     @Override
     public boolean act(HomeComponent component) {
         if (component instanceof Alarm && component.getId().equals(alarmId)) {
-            return ((Alarm) component).setEmergency();
+            return ((Alarm) component).getAlarmState().setEmergency();
         }
         return false;
     }

@@ -5,11 +5,13 @@ import ru.sbt.mipt.smarthome.components.Door;
 import ru.sbt.mipt.smarthome.components.Light;
 import ru.sbt.mipt.smarthome.components.Room;
 import ru.sbt.mipt.smarthome.components.SmartHome;
+import ru.sbt.mipt.smarthome.components.alarm.Alarm;
+
 import java.util.Arrays;
 
 
 public class HomeBuilder {
-    public static SmartHome buildSampleHome() {
+    public static SmartHome buildSampleHome(String alarmId) {
         return new SmartHome("super_sanya_smarthome", Arrays.asList(
                 new Room("kitchen", "kitchen_0", Arrays.asList(
                         new Light("1", false),
@@ -31,7 +33,8 @@ public class HomeBuilder {
                         new Light("11", false),
                         new Light("12", false),
                         new Door("13", false)
-                ))
+                )),
+                new Alarm(alarmId)
         ));
     }
 }
