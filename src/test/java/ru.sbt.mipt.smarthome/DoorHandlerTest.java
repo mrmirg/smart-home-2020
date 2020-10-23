@@ -2,16 +2,13 @@ package ru.sbt.mipt.smarthome.test;
 
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
 import ru.sbt.mipt.smarthome.components.*;
 import ru.sbt.mipt.smarthome.events.DoorOpened;
 import ru.sbt.mipt.smarthome.handlers.DoorHandler;
-
 import java.util.Arrays;
 import java.util.Collections;
 
-
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class DoorHandlerTest {

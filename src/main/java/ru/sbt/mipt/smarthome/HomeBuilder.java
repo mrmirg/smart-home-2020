@@ -1,5 +1,6 @@
 package ru.sbt.mipt.smarthome;
 
+
 import ru.sbt.mipt.smarthome.components.Door;
 import ru.sbt.mipt.smarthome.components.Light;
 import ru.sbt.mipt.smarthome.components.Room;
@@ -7,8 +8,8 @@ import ru.sbt.mipt.smarthome.components.SmartHome;
 
 import java.util.Arrays;
 
-public class HomeBuilder {
 
+public class HomeBuilder {
     public static SmartHome buildSampleHome() {
         return new SmartHome("super_sanya_smarthome", Arrays.asList(
                 new Room("kitchen", "kitchen_0", Arrays.asList(

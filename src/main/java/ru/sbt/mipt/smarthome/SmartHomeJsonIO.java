@@ -1,13 +1,10 @@
 package ru.sbt.mipt.smarthome;
 
+
 import com.google.gson.*;
-
-import ru.sbt.mipt.smarthome.components.HomeComponent;
 import ru.sbt.mipt.smarthome.components.SmartHome;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,6 +18,7 @@ public class SmartHomeJsonIO implements SmartHomeIO {
         this.json = new GsonBuilder().setPrettyPrinting().create();
     }
 
+
     public void writeHome(SmartHome smartHome, String path) throws IOException {
         if (smartHome == null) {
             throw new IllegalArgumentException("smartHome must be non-null");
@@ -32,8 +30,15 @@ public class SmartHomeJsonIO implements SmartHomeIO {
         writer.flush();
     }
 
-    public SmartHome readHome(String path) throws IOException {
-        String jsonString = new String(Files.readAllBytes(Paths.get(path)));
-        return json.fromJson(jsonString, SmartHome.class);
+
+    public SmartHome readHome(String path) {
+        SmartHome smartHome = null;
+        try {
+            String jsonString = new String(Files.readAllBytes(Paths.get(path)));
+            smartHome = json.fromJson(jsonString, SmartHome.class);
+        } catch (IOException e) {
+            System.out.println("Failed to deserialize smartHome\nNo idea what to do with this\n" + e.getMessage());
+        }
+        return smartHome;
     }
 }

@@ -1,7 +1,9 @@
 package ru.sbt.mipt.smarthome.events;
 
+
 public class LightOn implements SensorEvent {
     private final String deviceId;
+
 
     public LightOn(String deviceId) {
         if (deviceId == null) {
@@ -9,6 +11,7 @@ public class LightOn implements SensorEvent {
         }
         this.deviceId = deviceId;
     }
+
 
     @Override
     public String getComponentId() {

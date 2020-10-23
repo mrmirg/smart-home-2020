@@ -1,5 +1,6 @@
 package ru.sbt.mipt.smarthome.test;
 
+
 import org.junit.jupiter.api.Test;
 import ru.sbt.mipt.smarthome.components.Door;
 import ru.sbt.mipt.smarthome.components.Light;
@@ -8,7 +9,6 @@ import ru.sbt.mipt.smarthome.components.SmartHome;
 import ru.sbt.mipt.smarthome.events.DoorClosed;
 import ru.sbt.mipt.smarthome.events.DoorOpened;
 import ru.sbt.mipt.smarthome.handlers.HalldoorHandler;
-
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,7 +29,8 @@ public class HalldoorHandlerTest {
         Room anotherRoom = new Room("bedroom", "b", Arrays.asList(anotherDoor, anotherLight));
 
         SmartHome smartHome  = new SmartHome("supersmart", Arrays.asList(room, anotherRoom));
-        HalldoorHandler halldoorHandler = new HalldoorHandler(smartHome, halldoor.getId());
+        HalldoorHandler halldoorHandler = new HalldoorHandler(room, halldoor.getId());
+
 
         // when
         boolean successOpen = halldoorHandler.processEvent(new DoorOpened(halldoor.getId()));
@@ -38,8 +39,6 @@ public class HalldoorHandlerTest {
         assertTrue(successOpen);
         assertTrue(light1.isOn());
         assertTrue(light2.isOn());
-        assertTrue(halldoor.isOpened());
-        assertFalse(anotherDoor.isOpened());
         assertFalse(anotherLight.isOn());
 
         // when
@@ -53,6 +52,7 @@ public class HalldoorHandlerTest {
         assertFalse(anotherDoor.isOpened());
         assertFalse(anotherLight.isOn());
     }
+
 
     @Test
     public void openInvalidHalldoor() {
@@ -68,7 +68,7 @@ public class HalldoorHandlerTest {
         Room anotherRoom = new Room("bedroom", "b", Arrays.asList(anotherDoor, anotherLight));
 
         SmartHome smartHome  = new SmartHome("supersmart", Arrays.asList(room, anotherRoom));
-        HalldoorHandler halldoorHandler = new HalldoorHandler(smartHome, halldoor.getId());
+        HalldoorHandler halldoorHandler = new HalldoorHandler(room, halldoor.getId());
 
         // when
         boolean successOpen = halldoorHandler.processEvent(new DoorOpened("bla"));

@@ -1,29 +1,31 @@
 package ru.sbt.mipt.smarthome;
 
+
 import ru.sbt.mipt.smarthome.components.SmartHome;
-import ru.sbt.mipt.smarthome.events.EventGenerator;
 import ru.sbt.mipt.smarthome.events.RandomEventGeneratorBuilderWithIntIds;
-import ru.sbt.mipt.smarthome.handlers.SensorEventHandler;
+import ru.sbt.mipt.smarthome.handlers.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 
 public class Application {
-    public static void main(String... args) {
+    public static void main(String... args) throws IOException {
         SmartHomeIO smartHomeIO = new SmartHomeJsonIO();
-        SmartHome smartHome;
+        SmartHome smartHome = smartHomeIO.readHome("src/resources/smarthome.json");
 
-        try {
-            smartHome = smartHomeIO.readHome("src/resources/smarthome.json");
-        } catch (IOException e) {
-            System.out.println("Failed to deserialize smartHome\nNo idea what to do with this\n" + e.getMessage());
+        String alarmId = "alarm";
+        if (smartHome == null) {
             smartHome = HomeBuilder.buildSampleHome();
         }
 
-        EventGenerator eventGenerator = new RandomEventGeneratorBuilderWithIntIds(0, 13)
+        var eventGenerator = new RandomEventGeneratorBuilderWithIntIds(0, 13)
                 .buildRandomGenerator(100);
-        SensorEventHandler sensorEventHandler = new CompositeHandlerBuilder(smartHome)
-                .buildDefaultManager();
+
+        var sensorEventHandler = new CompositeEventHandler(Arrays.asList(
+                new DoorHandler(smartHome),
+                new LightHandler(smartHome)
+        ));
 
         EventLoop eventLoop = new EventLoop(eventGenerator, sensorEventHandler);
         eventLoop.spin();
