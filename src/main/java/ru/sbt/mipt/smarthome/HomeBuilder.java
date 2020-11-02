@@ -6,7 +6,6 @@ import ru.sbt.mipt.smarthome.components.Light;
 import ru.sbt.mipt.smarthome.components.Room;
 import ru.sbt.mipt.smarthome.components.SmartHome;
 import ru.sbt.mipt.smarthome.components.alarm.Alarm;
-
 import java.util.Arrays;
 
 
