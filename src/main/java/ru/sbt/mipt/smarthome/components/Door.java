@@ -4,6 +4,7 @@ package ru.sbt.mipt.smarthome.components;
 public class Door implements HomeComponent {
     private final String id;
     private boolean isOpen;
+    private boolean isLocked = false;
 
 
     public Door(String id, boolean isOpen) {
@@ -25,5 +26,15 @@ public class Door implements HomeComponent {
 
     public boolean isOpened() {
         return isOpen;
+    }
+
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+
+    public void setLocked(boolean locked) {
+        isLocked = locked;
     }
 }

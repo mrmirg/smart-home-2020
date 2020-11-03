@@ -1,11 +1,10 @@
 package ru.sbt.mipt.smarthome.handlers;
 
 
+import ru.sbt.mipt.smarthome.actions.LockDoor;
 import ru.sbt.mipt.smarthome.actions.OpenCloseDoor;
 import ru.sbt.mipt.smarthome.components.SmartHome;
-import ru.sbt.mipt.smarthome.events.DoorClosed;
-import ru.sbt.mipt.smarthome.events.DoorOpened;
-import ru.sbt.mipt.smarthome.events.SensorEvent;
+import ru.sbt.mipt.smarthome.events.*;
 
 
 public class DoorHandler implements SensorEventHandler {
@@ -27,6 +26,22 @@ public class DoorHandler implements SensorEventHandler {
             ));
             System.out.println(
                     (opened ? "Opening" : "Closing") +
+                            " door " +
+                            event.getComponentId() + " | " +
+                            (success ? "\tSuccess" : "\tFailure")
+            );
+            return success;
+        }
+
+        // DRY..
+        if (event instanceof DoorLocked || event instanceof DoorUnlocked) {
+            boolean locked = event instanceof DoorLocked;
+            boolean success = smartHome.applyAction(new LockDoor(
+                    event.getComponentId(),
+                    locked
+            ));
+            System.out.println(
+                    (locked ? "Locking" : "Unlocking") +
                             " door " +
                             event.getComponentId() + " | " +
                             (success ? "\tSuccess" : "\tFailure")

@@ -29,7 +29,6 @@ public class SmartHomeConfiguration {
             System.out.println(e.toString());
         }
 
-        System.out.println("??1");
         if (smartHome == null) {
             smartHome = new SmartHome("smart", Arrays.asList(
                     room1(),
@@ -38,9 +37,7 @@ public class SmartHomeConfiguration {
                     hallRoom(),
                     alarm()
             ));
-            System.out.println("??2");
         }
-        System.out.println("??3");
         return smartHome;
     }
 

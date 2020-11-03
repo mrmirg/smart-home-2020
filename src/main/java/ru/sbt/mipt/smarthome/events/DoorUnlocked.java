@@ -1,11 +1,11 @@
 package ru.sbt.mipt.smarthome.events;
 
 
-public class DoorOpened implements SensorEvent {
+public class DoorUnlocked implements SensorEvent {
     private final String deviceId;
 
 
-    public DoorOpened(String deviceId) {
+    public DoorUnlocked(String deviceId) {
         if (deviceId == null) {
             throw new IllegalArgumentException("Id cannot be null.");
         }
