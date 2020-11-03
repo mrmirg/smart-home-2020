@@ -6,18 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import ru.sbt.mipt.smarthome.components.SmartHome;
-import ru.sbt.mipt.smarthome.handlers.DoorHandler;
-import ru.sbt.mipt.smarthome.handlers.EventHandlerAdapter;
+
+import java.io.IOException;
 
 
 @Configuration
-@Import({HandlerConfiguration.class, SmartHomeConfiguration.class})
+@Import({HandlerConfiguration.class})
 public class AppConfiguration {
+    @Autowired HandlerConfiguration handlerConfiguration;
+
     @Bean
-    public SensorEventsManager sensorEventsManager() {
+    public SensorEventsManager sensorEventsManager() throws IOException {
         var eventManager = new SensorEventsManager();
 
-        eventManager.registerEventHandler();
+        eventManager.registerEventHandler(handlerConfiguration.alarmHandler());
+        eventManager.registerEventHandler(handlerConfiguration.lightHandler());
+        eventManager.registerEventHandler(handlerConfiguration.doorHandler());
+
+        return eventManager;
     }
 }

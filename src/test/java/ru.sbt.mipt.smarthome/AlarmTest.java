@@ -3,13 +3,18 @@ package ru.sbt.mipt.smarthome;
 
 import org.junit.jupiter.api.Test;
 import ru.sbt.mipt.smarthome.components.*;
-import ru.sbt.mipt.smarthome.components.alarm.*;
+import ru.sbt.mipt.smarthome.components.alarm.ActivatedState;
+import ru.sbt.mipt.smarthome.components.alarm.Alarm;
+import ru.sbt.mipt.smarthome.components.alarm.DeactivatedState;
+import ru.sbt.mipt.smarthome.components.alarm.EmergencyState;
 import ru.sbt.mipt.smarthome.events.AlarmActivation;
 import ru.sbt.mipt.smarthome.events.AlarmDeactivation;
 import ru.sbt.mipt.smarthome.handlers.AlarmHandler;
+
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class AlarmTest {

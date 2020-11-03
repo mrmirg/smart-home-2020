@@ -1,8 +1,10 @@
 package ru.sbt.mipt.smarthome;
 
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import ru.sbt.mipt.smarthome.components.SmartHome;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;

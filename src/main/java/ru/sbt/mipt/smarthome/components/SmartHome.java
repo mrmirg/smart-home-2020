@@ -1,8 +1,9 @@
 package ru.sbt.mipt.smarthome.components;
 
 
-import ru.sbt.mipt.smarthome.actions.Action;
 import ru.sbt.mipt.smarthome.Actionable;
+import ru.sbt.mipt.smarthome.actions.Action;
+
 import java.util.ArrayList;
 import java.util.Collection;
 

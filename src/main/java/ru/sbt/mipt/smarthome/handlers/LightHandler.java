@@ -3,8 +3,8 @@ package ru.sbt.mipt.smarthome.handlers;
 
 import ru.sbt.mipt.smarthome.actions.TurnLight;
 import ru.sbt.mipt.smarthome.components.SmartHome;
-import ru.sbt.mipt.smarthome.events.LightOn;
 import ru.sbt.mipt.smarthome.events.LightOff;
+import ru.sbt.mipt.smarthome.events.LightOn;
 import ru.sbt.mipt.smarthome.events.SensorEvent;
 
 

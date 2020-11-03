@@ -3,7 +3,10 @@ package ru.sbt.mipt.smarthome.handlers;
 
 import com.coolcompany.smarthome.events.CCSensorEvent;
 import com.coolcompany.smarthome.events.EventHandler;
-import ru.sbt.mipt.smarthome.events.*;
+import ru.sbt.mipt.smarthome.events.DoorClosed;
+import ru.sbt.mipt.smarthome.events.DoorOpened;
+import ru.sbt.mipt.smarthome.events.LightOff;
+import ru.sbt.mipt.smarthome.events.LightOn;
 
 
 public class EventHandlerAdapter implements EventHandler {
@@ -20,12 +23,12 @@ public class EventHandlerAdapter implements EventHandler {
 
         String id = event.getObjectId();
         switch (event.getEventType()) {
-            case "LightIsOn"    : handler.processEvent(new LightOn(id));
-            case "LightIsOff"   : handler.processEvent(new LightOff(id));
-            case "DoorIsOpen"   : handler.processEvent(new DoorOpened(id));
-            case "DoorIsClosed" : handler.processEvent(new DoorClosed(id));
-            case "DoorIsLocked" : ;
-            case "DoorIsUnlocked" : ;
+            case "LightIsOn"    : handler.processEvent(new LightOn(id));    break;
+            case "LightIsOff"   : handler.processEvent(new LightOff(id));   break;
+            case "DoorIsOpen"   : handler.processEvent(new DoorOpened(id)); break;
+            case "DoorIsClosed" : handler.processEvent(new DoorClosed(id)); break;
+            case "DoorIsLocked" : break;
+            case "DoorIsUnlocked" : break;
 
             default: throw new RuntimeException("Illegal event type");
         }

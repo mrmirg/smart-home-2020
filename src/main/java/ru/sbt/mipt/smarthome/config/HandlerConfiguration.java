@@ -1,39 +1,48 @@
 package ru.sbt.mipt.smarthome.config;
 
 
+import com.coolcompany.smarthome.events.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Scope;
-import ru.sbt.mipt.smarthome.components.SmartHome;
 import ru.sbt.mipt.smarthome.handlers.*;
+
+import java.io.IOException;
 
 
 @Configuration
-@Import({ComponentConfiguration.class, SmartHomeConfiguration.class})
+@Import({SmartHomeConfiguration.class})
 public class HandlerConfiguration {
-    @Autowired private SmartHome smartHome;
-    @Autowired private String alarmId;
+    @Autowired private SmartHomeConfiguration smartHomeConfiguration;
 
 
     @Bean
-    @Scope("prototype")
-    public SensorEventHandler doorHandler() {
-        return new AlarmDecorator(smartHome, alarmId, new DoorHandler(smartHome));
+    public EventHandler doorHandler() throws IOException {
+        return new EventHandlerAdapter(
+                new AlarmDecorator(
+                        smartHomeConfiguration.smartHome(),
+                        smartHomeConfiguration.alarm().getId(),
+                        new DoorHandler(smartHomeConfiguration.smartHome())
+                ));
     }
 
 
     @Bean
-    @Scope("prototype")
-    public SensorEventHandler lightHandler() {
-        return new AlarmDecorator(smartHome, alarmId, new LightHandler(smartHome));
+    public EventHandler lightHandler() throws IOException {
+        return new EventHandlerAdapter(
+                new AlarmDecorator(
+                        smartHomeConfiguration.smartHome(),
+                        smartHomeConfiguration.alarm().getId(),
+                        new LightHandler(smartHomeConfiguration.smartHome())
+                ));
     }
 
 
     @Bean
-    @Scope("prototype")
-    public SensorEventHandler alarmHandler() {
-        return new AlarmHandler(smartHome);
+    public EventHandler alarmHandler() throws IOException {
+        return new EventHandlerAdapter(
+                new AlarmHandler(smartHomeConfiguration.smartHome())
+        );
     }
 }

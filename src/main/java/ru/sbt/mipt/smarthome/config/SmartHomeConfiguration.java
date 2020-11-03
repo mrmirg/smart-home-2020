@@ -1,10 +1,8 @@
 package ru.sbt.mipt.smarthome.config;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import ru.sbt.mipt.smarthome.SmartHomeIO;
 import ru.sbt.mipt.smarthome.SmartHomeJsonIO;
 import ru.sbt.mipt.smarthome.components.Door;
@@ -18,15 +16,122 @@ import java.util.Arrays;
 
 
 @Configuration
-@Import({ComponentConfiguration.class})
 public class SmartHomeConfiguration {
-    @Autowired String alarmId;
+    private final String homePath = "src/resources/smarthome.json";
 
+    @Bean public SmartHome smartHome() throws IOException {
+        SmartHome smartHome = null;
+
+        try {
+            smartHome = smartHomeIO().readHome(homePath);
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+        System.out.println("??1");
+        if (smartHome == null) {
+            smartHome = new SmartHome("smart", Arrays.asList(
+                    room1(),
+                    room2(),
+                    room3(),
+                    hallRoom(),
+                    alarm()
+            ));
+            System.out.println("??2");
+        }
+        System.out.println("??3");
+        return smartHome;
+    }
+
+    @Bean public Alarm alarm() {
+        return new Alarm("alarm0");
+    }
+
+    @Bean public Room room1() {
+        return new Room("room1", "r1", Arrays.asList(
+                door1(),
+                light1_1(),
+                light1_2()
+        ));
+    }
+
+    @Bean public Room room2() {
+        return new Room("room2", "r2", Arrays.asList(
+                door2(),
+                light2_1()
+        ));
+    }
+
+    @Bean public Room room3() {
+        return new Room("room3", "r3", Arrays.asList(
+                door3(),
+                light3_1(),
+                light3_2(),
+                light3_3()
+        ));
+    }
 
     @Bean
-    public SmartHome smartHome() throws IOException {
-        var home = smartHomeIO().readHome("src/resources/smarthome.json");
-        return home == null ? buildSampleHome(alarmId) : home;
+    public Room hallRoom() {
+        return new Room("hallroom", "r0", Arrays.asList(
+                door3(),
+                light3_1(),
+                light3_2(),
+                light3_3()
+        ));
+    }
+
+    @Bean public Door door1() {
+        return new Door("3", false);
+    }
+
+    @Bean public Door door2() {
+        return new Door("5", false);
+    }
+
+    @Bean public Door door3() {
+        return new Door("9", false);
+    }
+
+    @Bean public Door hallDoor() {
+        return new Door("13", false);
+    }
+
+    @Bean public Light light1_1() {
+        return new Light("1", false);
+    }
+
+    @Bean public Light light1_2() {
+        return new Light("2", false);
+    }
+
+    @Bean public Light light2_1() {
+        return new Light("4", false);
+    }
+
+    @Bean public Light light3_1() {
+        return new Light("6", false);
+    }
+
+    @Bean public Light light3_2() {
+        return new Light("7", false);
+    }
+
+    @Bean public Light light3_3() {
+        return new Light("8", false);
+    }
+
+    @Bean public Light hallLight_1() {
+        return new Light("10", false);
+    }
+
+    @Bean public Light hallLight_2() {
+        return new Light("11", false);
+    }
+
+    @Bean public Light hallLight_3() {
+        return new Light("12", false);
     }
 
 
@@ -34,34 +139,4 @@ public class SmartHomeConfiguration {
     public SmartHomeIO smartHomeIO() {
         return new SmartHomeJsonIO();
     }
-
-
-    private SmartHome buildSampleHome(String alarmId) {
-        return new SmartHome("super_sanya_smarthome", Arrays.asList(
-                new Room("kitchen", "kitchen_0", Arrays.asList(
-                        new Light("1", false),
-                        new Light("2", true),
-                        new Door("3", false)
-                )),
-                new Room("bathroom", "bathroom0234", Arrays.asList(
-                        new Light("4", true),
-                        new Door("5", false)
-                )),
-                new Room("bedroom", "bedroom12", Arrays.asList(
-                        new Light("6", false),
-                        new Light("7", false),
-                        new Light("8", false),
-                        new Door("9", false)
-                )),
-                new Room("hall", "hall007", Arrays.asList(
-                        new Light("10", false),
-                        new Light("11", false),
-                        new Light("12", false),
-                        new Door("13", false)
-                )),
-                new Alarm(alarmId)
-        ));
-    }
-
-
 }

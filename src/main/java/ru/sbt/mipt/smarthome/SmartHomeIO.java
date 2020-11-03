@@ -2,6 +2,7 @@ package ru.sbt.mipt.smarthome;
 
 
 import ru.sbt.mipt.smarthome.components.SmartHome;
+
 import java.io.IOException;
 
 
