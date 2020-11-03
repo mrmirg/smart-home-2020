@@ -73,9 +73,9 @@ public class SmartHomeConfiguration {
     public Room hallRoom() {
         return new Room("hallroom", "r0", Arrays.asList(
                 door3(),
-                light3_1(),
-                light3_2(),
-                light3_3()
+                hallLight_1(),
+                hallLight_2(),
+                hallLight_3()
         ));
     }
 
