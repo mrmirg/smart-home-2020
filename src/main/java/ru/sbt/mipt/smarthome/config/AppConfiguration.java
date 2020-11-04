@@ -22,6 +22,7 @@ public class AppConfiguration {
         eventManager.registerEventHandler(handlerConfiguration.alarmHandler());
         eventManager.registerEventHandler(handlerConfiguration.lightHandler());
         eventManager.registerEventHandler(handlerConfiguration.doorHandler());
+        eventManager.registerEventHandler(handlerConfiguration.halldoorHandler());
 
         return eventManager;
     }

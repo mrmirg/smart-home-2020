@@ -45,4 +45,16 @@ public class HandlerConfiguration {
                 new AlarmHandler(smartHomeConfiguration.smartHome())
         );
     }
+
+
+    @Bean
+    public EventHandler halldoorHandler() throws IOException {
+        return new EventHandlerAdapter(
+                new AlarmDecorator(
+                        smartHomeConfiguration.smartHome(),
+                        smartHomeConfiguration.alarm().getId(),
+                        new HalldoorHandler(smartHomeConfiguration.smartHome())
+                )
+        );
+    }
 }
