@@ -47,7 +47,7 @@ public class SmartHomeConfiguration {
 
     @Bean public Room room1() {
         return new Room("room1", "r1", Arrays.asList(
-                hallDoor(),
+                door1(),
                 light1_1(),
                 light1_2()
         ));
@@ -72,14 +72,14 @@ public class SmartHomeConfiguration {
     @Bean
     public Room hallRoom() {
         return new Room("hallroom", "r0", Arrays.asList(
-                door3(),
+                hallDoor(),
                 hallLight_1(),
                 hallLight_2(),
                 hallLight_3()
         ));
     }
 
-    @Bean public Door halldoor() {
+    @Bean public Door door1() {
         return new Door("3", false);
     }
 
