@@ -41,7 +41,7 @@ public class AlarmDecoratorTest {
 
         // when
         boolean doorOpened = eventHandler
-                .processEvent(new DoorOpened("2"));
+                .processEvent(new DoorOpened("2", true));
         boolean alarmDeactivated = alarm.getAlarmState() instanceof DeactivatedState;
         boolean doorActuallyOpened = door.isOpened();
 
@@ -76,12 +76,12 @@ public class AlarmDecoratorTest {
 
         // when
         boolean doorOpened = eventHandler
-                .processEvent(new DoorOpened("2"));
+                .processEvent(new DoorOpened("2", true));
         boolean alarmEmergency = alarm.getAlarmState() instanceof EmergencyState;
         boolean doorActuallyOpened = door.isOpened();
 
         boolean lightOn = eventHandler
-                .processEvent(new LightOn("1"));
+                .processEvent(new LightOn("1", true));
         boolean lightActuallyOn = light.isOn();
 
         // then

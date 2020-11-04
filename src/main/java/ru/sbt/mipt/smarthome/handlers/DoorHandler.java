@@ -4,7 +4,9 @@ package ru.sbt.mipt.smarthome.handlers;
 import ru.sbt.mipt.smarthome.actions.LockDoor;
 import ru.sbt.mipt.smarthome.actions.OpenCloseDoor;
 import ru.sbt.mipt.smarthome.components.SmartHome;
-import ru.sbt.mipt.smarthome.events.*;
+import ru.sbt.mipt.smarthome.events.DoorLocked;
+import ru.sbt.mipt.smarthome.events.DoorOpened;
+import ru.sbt.mipt.smarthome.events.SensorEvent;
 
 
 public class DoorHandler implements SensorEventHandler {
@@ -18,14 +20,14 @@ public class DoorHandler implements SensorEventHandler {
 
     @Override
     public boolean processEvent(SensorEvent event) {
-        if (event instanceof DoorOpened || event instanceof DoorClosed) {
-            boolean opened = event instanceof DoorOpened;
+        if (event instanceof DoorOpened) {
+            var doorOpened = (DoorOpened) event;
             boolean success = smartHome.applyAction(new OpenCloseDoor(
                     event.getComponentId(),
-                    opened
+                    doorOpened.isOpened()
             ));
             System.out.println(
-                    (opened ? "Opening" : "Closing") +
+                    (doorOpened.isOpened() ? "Opening" : "Closing") +
                             " door " +
                             event.getComponentId() + " | " +
                             (success ? "\tSuccess" : "\tFailure")
@@ -34,14 +36,14 @@ public class DoorHandler implements SensorEventHandler {
         }
 
         // DRY..
-        if (event instanceof DoorLocked || event instanceof DoorUnlocked) {
-            boolean locked = event instanceof DoorLocked;
+        if (event instanceof DoorLocked) {
+            var doorLocked = (DoorLocked) event;
             boolean success = smartHome.applyAction(new LockDoor(
                     event.getComponentId(),
-                    locked
+                    doorLocked.isLocked()
             ));
             System.out.println(
-                    (locked ? "Locking" : "Unlocking") +
+                    (doorLocked.isLocked() ? "Locking" : "Unlocking") +
                             " door " +
                             event.getComponentId() + " | " +
                             (success ? "\tSuccess" : "\tFailure")

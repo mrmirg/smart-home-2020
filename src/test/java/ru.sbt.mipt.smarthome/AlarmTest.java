@@ -8,7 +8,6 @@ import ru.sbt.mipt.smarthome.components.alarm.Alarm;
 import ru.sbt.mipt.smarthome.components.alarm.DeactivatedState;
 import ru.sbt.mipt.smarthome.components.alarm.EmergencyState;
 import ru.sbt.mipt.smarthome.events.AlarmActivation;
-import ru.sbt.mipt.smarthome.events.AlarmDeactivation;
 import ru.sbt.mipt.smarthome.handlers.AlarmHandler;
 
 import java.util.Arrays;
@@ -33,10 +32,10 @@ public class AlarmTest {
 
         // when
         boolean successActivated = alarmHandler
-                .processEvent(new AlarmActivation("alarm0", "very_safe_password"));
+                .processEvent(new AlarmActivation("alarm0", "very_safe_password", true));
         boolean isAlarmActivated = alarm.getAlarmState() instanceof ActivatedState;
         boolean successDeactivated = alarmHandler
-                .processEvent(new AlarmDeactivation("alarm0", "very_safe_password"));
+                .processEvent(new AlarmActivation("alarm0", "very_safe_password", false));
         boolean isAlarmDeactivated = alarm.getAlarmState() instanceof DeactivatedState;
 
         // then
@@ -62,14 +61,14 @@ public class AlarmTest {
 
         //when
         boolean successFalseActivated = alarmHandler
-                .processEvent(new AlarmActivation("alarm_not_0", "very_safe_password"));
+                .processEvent(new AlarmActivation("alarm_not_0", "very_safe_password", true));
         boolean isFalseActivated = alarm.getAlarmState() instanceof ActivatedState;
         boolean successActivated = alarmHandler
-                .processEvent(new AlarmActivation("alarm0", "very_safe_password"));
+                .processEvent(new AlarmActivation("alarm0", "very_safe_password", true));
         boolean isActivated = alarm.getAlarmState() instanceof ActivatedState;
 
         boolean successFalseDeactivated = alarmHandler
-                .processEvent(new AlarmDeactivation("alarm_not_0", "very_safe_password"));
+                .processEvent(new AlarmActivation("alarm_not_0", "very_safe_password", false));
         boolean isFalseDeactivated = alarm.getAlarmState() instanceof DeactivatedState;
 
         // alarm deactivation with wrong id must not affect existing alarm
@@ -101,16 +100,16 @@ public class AlarmTest {
 
         // when
         boolean successActivated = alarmHandler
-                .processEvent(new AlarmActivation("alarm0", "very_safe_password"));
+                .processEvent(new AlarmActivation("alarm0", "very_safe_password", true));
         boolean successDeactivated = alarmHandler
-                .processEvent(new AlarmDeactivation("alarm0", "not_very_safe_password"));
+                .processEvent(new AlarmActivation("alarm0", "not_very_safe_password", false));
         boolean isEmergency = alarm.getAlarmState() instanceof EmergencyState;
         boolean successDeactivated1 = alarmHandler
-                .processEvent(new AlarmDeactivation("alarm0", "not_very_safe_password"));
+                .processEvent(new AlarmActivation("alarm0", "not_very_safe_password", false));
         boolean isEmergency1 = alarm.getAlarmState() instanceof EmergencyState;
 
         boolean successDeactivated2 = alarmHandler
-                .processEvent(new AlarmDeactivation("alarm0", "very_safe_password"));
+                .processEvent(new AlarmActivation("alarm0", "very_safe_password", false));
         boolean isEmergency2 = alarm.getAlarmState() instanceof EmergencyState;
 
 

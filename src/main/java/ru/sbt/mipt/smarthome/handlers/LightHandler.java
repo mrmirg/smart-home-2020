@@ -3,7 +3,6 @@ package ru.sbt.mipt.smarthome.handlers;
 
 import ru.sbt.mipt.smarthome.actions.TurnLight;
 import ru.sbt.mipt.smarthome.components.SmartHome;
-import ru.sbt.mipt.smarthome.events.LightOff;
 import ru.sbt.mipt.smarthome.events.LightOn;
 import ru.sbt.mipt.smarthome.events.SensorEvent;
 
@@ -19,15 +18,14 @@ public class LightHandler implements SensorEventHandler {
 
     @Override
     public boolean processEvent(SensorEvent event) {
-        if (event instanceof LightOn || event instanceof LightOff) {
-            boolean lightOn = event instanceof LightOn;
+        if (event instanceof LightOn) {
             boolean success = smartHome.applyAction(new TurnLight(
                     event.getComponentId(),
-                    lightOn
+                    ((LightOn) event).isOn()
             ));
             System.out.println(
                     "Turning " +
-                    (lightOn ? "on" : "off") +
+                    (((LightOn) event).isOn() ? "on" : "off") +
                             " light " +
                             event.getComponentId() + " | " +
                             (success ? "\tSuccess" : "\tFailure")

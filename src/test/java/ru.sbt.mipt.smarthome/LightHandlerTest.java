@@ -23,8 +23,8 @@ public class LightHandlerTest {
         HomeComponent atticRoom = new Room("attic", "attic", Arrays.asList(door, light));
         SmartHome smartHome = new SmartHome("strangehome", Collections.singletonList(atticRoom));
         LightHandler lightHandler = new LightHandler(smartHome);
-        LightOn nonExistingLightOn = new LightOn("3");
-        LightOn nonALightOn = new LightOn("2");
+        LightOn nonExistingLightOn = new LightOn("3", true);
+        LightOn nonALightOn = new LightOn("2", true);
 
         // when
         boolean success = lightHandler.processEvent(nonALightOn) ||
@@ -46,7 +46,7 @@ public class LightHandlerTest {
         HomeComponent atticRoom = new Room("attic", "attic", Arrays.asList(door, light));
         SmartHome smartHome = new SmartHome("strangehome", Collections.singletonList(atticRoom));
         LightHandler lightHandler = new LightHandler(smartHome);
-        LightOn lightOn = new LightOn("1");
+        LightOn lightOn = new LightOn("1", true);
 
         // when
         boolean success = lightHandler.processEvent(lightOn);

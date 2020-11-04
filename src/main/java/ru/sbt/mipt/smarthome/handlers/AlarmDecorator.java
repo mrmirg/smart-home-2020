@@ -4,8 +4,6 @@ package ru.sbt.mipt.smarthome.handlers;
 import ru.sbt.mipt.smarthome.actions.CheckAlarmActivated;
 import ru.sbt.mipt.smarthome.actions.SetAlarmEmergency;
 import ru.sbt.mipt.smarthome.components.SmartHome;
-import ru.sbt.mipt.smarthome.events.AlarmActivation;
-import ru.sbt.mipt.smarthome.events.AlarmDeactivation;
 import ru.sbt.mipt.smarthome.events.SensorEvent;
 
 
@@ -27,10 +25,7 @@ public class AlarmDecorator implements SensorEventHandler {
 
     @Override
     public boolean processEvent(SensorEvent event) {
-        if (smartHome.applyAction(new CheckAlarmActivated(alarmId)) &&
-                !(event instanceof AlarmActivation) &&
-                !(event instanceof AlarmDeactivation)) {
-
+        if (smartHome.applyAction(new CheckAlarmActivated(alarmId))) {
             smartHome.applyAction(new SetAlarmEmergency(alarmId));
             System.out.println("Alarm " + alarmId + " | Illegal access detected! Sending sms..");
             return false;

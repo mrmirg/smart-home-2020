@@ -6,8 +6,8 @@ import ru.sbt.mipt.smarthome.components.Door;
 import ru.sbt.mipt.smarthome.components.Light;
 import ru.sbt.mipt.smarthome.components.Room;
 import ru.sbt.mipt.smarthome.components.SmartHome;
-import ru.sbt.mipt.smarthome.events.DoorClosed;
 import ru.sbt.mipt.smarthome.events.DoorOpened;
+import ru.sbt.mipt.smarthome.events.HalldoorOpened;
 import ru.sbt.mipt.smarthome.handlers.HalldoorHandler;
 
 import java.util.Arrays;
@@ -31,11 +31,13 @@ public class HalldoorHandlerTest {
         Room anotherRoom = new Room("bedroom", "b", Arrays.asList(anotherDoor, anotherLight));
 
         SmartHome smartHome  = new SmartHome("supersmart", Arrays.asList(room, anotherRoom));
-        HalldoorHandler halldoorHandler = new HalldoorHandler(room, halldoor.getId());
+        HalldoorHandler halldoorHandler = new HalldoorHandler(smartHome);
 
 
         // when
-        boolean successOpen = halldoorHandler.processEvent(new DoorOpened(halldoor.getId()));
+        boolean successOpen = halldoorHandler.processEvent(
+                new HalldoorOpened(new DoorOpened(halldoor.getId(), true))
+        );
 
         // then
         assertTrue(successOpen);
@@ -44,7 +46,9 @@ public class HalldoorHandlerTest {
         assertFalse(anotherLight.isOn());
 
         // when
-        boolean successClose = halldoorHandler.processEvent(new DoorClosed(halldoor.getId()));
+        boolean successClose = halldoorHandler.processEvent(
+                new HalldoorOpened(new DoorOpened(halldoor.getId(), false))
+        );
 
         // then
         assertTrue(successClose);
@@ -70,10 +74,10 @@ public class HalldoorHandlerTest {
         Room anotherRoom = new Room("bedroom", "b", Arrays.asList(anotherDoor, anotherLight));
 
         SmartHome smartHome  = new SmartHome("supersmart", Arrays.asList(room, anotherRoom));
-        HalldoorHandler halldoorHandler = new HalldoorHandler(room, halldoor.getId());
+        HalldoorHandler halldoorHandler = new HalldoorHandler(smartHome);
 
         // when
-        boolean successOpen = halldoorHandler.processEvent(new DoorOpened("bla"));
+        boolean successOpen = halldoorHandler.processEvent(new DoorOpened("bla", true));
 
         // then
         assertFalse(successOpen);

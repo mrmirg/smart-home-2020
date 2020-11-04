@@ -19,10 +19,10 @@ public class RandomEventGeneratorBuilderWithIntIds {
         ArrayList<SensorEvent> events = new ArrayList<>();
 
         for (int i = idLowerBound; i < idUpperBound; i++) {
-            events.add(new DoorOpened(Integer.toString(i)));
-            events.add(new DoorClosed(Integer.toString(i)));
-            events.add(new LightOn(Integer.toString(i)));
-            events.add(new LightOff(Integer.toString(i)));
+            events.add(new DoorOpened(Integer.toString(i), true));
+            events.add(new DoorOpened(Integer.toString(i), false));
+            events.add(new LightOn(Integer.toString(i), true));
+            events.add(new LightOn(Integer.toString(i), false));
         }
         return new RandomEventGenerator(events, iterCount);
     }

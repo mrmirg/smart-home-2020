@@ -23,8 +23,8 @@ public class DoorHandlerTest {
         HomeComponent atticRoom = new Room("attic", "attic", Arrays.asList(door, light));
         SmartHome smartHome = new SmartHome("strangehome", Collections.singletonList(atticRoom));
         DoorHandler doorHandler = new DoorHandler(smartHome);
-        DoorOpened nonExistingDoorOpened = new DoorOpened("3");
-        DoorOpened nonADoorOpened = new DoorOpened("1");
+        DoorOpened nonExistingDoorOpened = new DoorOpened("3", true);
+        DoorOpened nonADoorOpened = new DoorOpened("1", true);
 
         // when
         boolean success = doorHandler.processEvent(nonADoorOpened) ||
@@ -45,7 +45,7 @@ public class DoorHandlerTest {
         HomeComponent atticRoom = new Room("attic", "attic", Arrays.asList(door, light));
         SmartHome smartHome = new SmartHome("strangehome", Collections.singletonList(atticRoom));
         DoorHandler doorHandler = new DoorHandler(smartHome);
-        DoorOpened doorOpened = new DoorOpened("2");
+        DoorOpened doorOpened = new DoorOpened("2", true);
 
         // when
         boolean success = doorHandler.processEvent(doorOpened);
