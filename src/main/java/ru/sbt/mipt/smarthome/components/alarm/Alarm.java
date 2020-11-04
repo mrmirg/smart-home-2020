@@ -5,13 +5,7 @@ import ru.sbt.mipt.smarthome.components.HomeComponent;
 public class Alarm implements HomeComponent {
     private final String id;
     private String fingerPrint;
-    private boolean superMegaLoudAlarmNotifier;
     private AlarmState alarmState;
-
-
-    boolean isAlarmNotifierEnabled() {
-        return superMegaLoudAlarmNotifier;
-    }
 
 
     String getFingerPrint() {
@@ -19,9 +13,6 @@ public class Alarm implements HomeComponent {
     }
 
 
-    void enableAlarmNotifier(boolean enable) {
-        superMegaLoudAlarmNotifier = enable;
-    }
 
 
     void setFingerPrint(String fingerPrint) {
@@ -40,7 +31,6 @@ public class Alarm implements HomeComponent {
     public Alarm(String id) {
         this.alarmState = new DeactivatedState(this);
         this.id = id;
-        this.superMegaLoudAlarmNotifier = false;
     }
 
 
