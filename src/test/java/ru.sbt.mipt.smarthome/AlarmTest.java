@@ -3,10 +3,7 @@ package ru.sbt.mipt.smarthome;
 
 import org.junit.jupiter.api.Test;
 import ru.sbt.mipt.smarthome.components.*;
-import ru.sbt.mipt.smarthome.components.alarm.ActivatedState;
 import ru.sbt.mipt.smarthome.components.alarm.Alarm;
-import ru.sbt.mipt.smarthome.components.alarm.DeactivatedState;
-import ru.sbt.mipt.smarthome.components.alarm.EmergencyState;
 import ru.sbt.mipt.smarthome.events.AlarmActivation;
 import ru.sbt.mipt.smarthome.handlers.AlarmHandler;
 

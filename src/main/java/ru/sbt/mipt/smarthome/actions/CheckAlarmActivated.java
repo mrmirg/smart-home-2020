@@ -2,9 +2,7 @@ package ru.sbt.mipt.smarthome.actions;
 
 
 import ru.sbt.mipt.smarthome.components.HomeComponent;
-import ru.sbt.mipt.smarthome.components.alarm.ActivatedState;
 import ru.sbt.mipt.smarthome.components.alarm.Alarm;
-import ru.sbt.mipt.smarthome.components.alarm.EmergencyState;
 
 
 public class CheckAlarmActivated implements Action {

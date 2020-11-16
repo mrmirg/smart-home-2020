@@ -7,16 +7,12 @@ import org.springframework.context.support.AbstractApplicationContext;
 import rc.RemoteControlImpl;
 import ru.sbt.mipt.smarthome.actions.CheckAllLightsOff;
 import ru.sbt.mipt.smarthome.commands.*;
-import ru.sbt.mipt.smarthome.components.alarm.ActivatedState;
-import ru.sbt.mipt.smarthome.components.alarm.DeactivatedState;
-import ru.sbt.mipt.smarthome.components.alarm.EmergencyState;
 import ru.sbt.mipt.smarthome.config.SmartHomeConfiguration;
 
 import java.io.IOException;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -34,7 +30,8 @@ public class RemoteControlTest {
 
         var fingerprint = "qwerty";
         var remoteControl = new RemoteControlImpl(
-                Map.of(rcId, Map.of(
+                rcId,
+                Map.of(
                         "A", new ActivateAlarm(
                                 config.smartHome(),
                                 true,
@@ -57,29 +54,29 @@ public class RemoteControlTest {
                                 false,
                                 config.alarm().getId(),
                                 "ytrewq"
-                        ))
+                        )
                 )
         );
 
         // when
         remoteControl.onButtonPressed("A", rcId);
         //then
-        assertTrue(config.alarm().getState() instanceof ActivatedState);
+        assertTrue(config.alarm().isActivated());
 
         // when
         remoteControl.onButtonPressed("C", rcId);
         // then
-        assertTrue(config.alarm().getState() instanceof EmergencyState);
+        assertTrue(config.alarm().isEmergency());
 
         // when
         remoteControl.onButtonPressed("D", rcId);
         // then
-        assertTrue(config.alarm().getState() instanceof EmergencyState);
+        assertTrue(config.alarm().isEmergency());
 
         // when
         remoteControl.onButtonPressed("B", rcId);
         // then
-        assertTrue(config.alarm().getState() instanceof DeactivatedState);
+        assertTrue(config.alarm().isDeactivated());
     }
 
 
@@ -87,7 +84,7 @@ public class RemoteControlTest {
     public void OpenHalldoorTest() throws IOException {
         // given
         var remoteControl = new RemoteControlImpl(
-                Map.of(rcId, Map.of(
+                rcId, Map.of(
                         "A", new OpenHalldoor(
                                 config.smartHome(),
                                 true,
@@ -99,7 +96,7 @@ public class RemoteControlTest {
                                 config.hallDoor().getId()
                         )
                 )
-        ));
+        );
 
         // when
         remoteControl.onButtonPressed("A", rcId);
@@ -117,7 +114,7 @@ public class RemoteControlTest {
     public void TurnHallLightTest() throws IOException {
         // given
         var remoteControl = new RemoteControlImpl(
-                Map.of(rcId, Map.of(
+                rcId, Map.of(
                         "A", new TurnHallLight(
                                 config.smartHome(),
                                 true,
@@ -127,7 +124,7 @@ public class RemoteControlTest {
                                 config.smartHome(),
                                 false,
                                 config.hallDoor().getId()
-                        ))
+                        )
                 )
         );
 
@@ -154,7 +151,7 @@ public class RemoteControlTest {
     public void TurnAllLightsTest() throws IOException {
         // given
         var remoteControl = new RemoteControlImpl(
-                Map.of(rcId, Map.of(
+                rcId, Map.of(
                         "A", new TurnAllLights(
                                 config.smartHome(),
                                 true
@@ -162,7 +159,7 @@ public class RemoteControlTest {
                         "B", new TurnAllLights(
                                 config.smartHome(),
                                 false
-                        ))
+                        )
                 )
         );
 

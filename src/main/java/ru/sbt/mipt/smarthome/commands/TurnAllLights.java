@@ -1,8 +1,6 @@
 package ru.sbt.mipt.smarthome.commands;
 
 
-import ru.sbt.mipt.smarthome.actions.*;
-import ru.sbt.mipt.smarthome.commands.SensorCommand;
 import ru.sbt.mipt.smarthome.components.SmartHome;
 
 

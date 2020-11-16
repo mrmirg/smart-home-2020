@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import ru.sbt.mipt.smarthome.actions.SetAlarmActivated;
 import ru.sbt.mipt.smarthome.components.*;
 import ru.sbt.mipt.smarthome.components.alarm.Alarm;
-import ru.sbt.mipt.smarthome.components.alarm.DeactivatedState;
-import ru.sbt.mipt.smarthome.components.alarm.EmergencyState;
 import ru.sbt.mipt.smarthome.events.DoorOpened;
 import ru.sbt.mipt.smarthome.events.LightOn;
 import ru.sbt.mipt.smarthome.handlers.*;
