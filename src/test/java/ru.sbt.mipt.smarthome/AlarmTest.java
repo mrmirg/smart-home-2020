@@ -33,10 +33,10 @@ public class AlarmTest {
         // when
         boolean successActivated = alarmHandler
                 .processEvent(new AlarmActivation("alarm0", "very_safe_password", true));
-        boolean isAlarmActivated = alarm.getAlarmState() instanceof ActivatedState;
+        boolean isAlarmActivated = alarm.isActivated();
         boolean successDeactivated = alarmHandler
                 .processEvent(new AlarmActivation("alarm0", "very_safe_password", false));
-        boolean isAlarmDeactivated = alarm.getAlarmState() instanceof DeactivatedState;
+        boolean isAlarmDeactivated = alarm.isDeactivated();
 
         // then
         assertTrue(successActivated);
@@ -62,17 +62,17 @@ public class AlarmTest {
         //when
         boolean successFalseActivated = alarmHandler
                 .processEvent(new AlarmActivation("alarm_not_0", "very_safe_password", true));
-        boolean isFalseActivated = alarm.getAlarmState() instanceof ActivatedState;
+        boolean isFalseActivated = alarm.isActivated();
         boolean successActivated = alarmHandler
                 .processEvent(new AlarmActivation("alarm0", "very_safe_password", true));
-        boolean isActivated = alarm.getAlarmState() instanceof ActivatedState;
+        boolean isActivated = alarm.isActivated();
 
         boolean successFalseDeactivated = alarmHandler
                 .processEvent(new AlarmActivation("alarm_not_0", "very_safe_password", false));
-        boolean isFalseDeactivated = alarm.getAlarmState() instanceof DeactivatedState;
+        boolean isFalseDeactivated = alarm.isDeactivated();
 
         // alarm deactivation with wrong id must not affect existing alarm
-        boolean isEmergency = alarm.getAlarmState() instanceof EmergencyState;
+        boolean isEmergency = alarm.isEmergency();
 
         //then
         assertFalse(successFalseActivated);
@@ -103,14 +103,14 @@ public class AlarmTest {
                 .processEvent(new AlarmActivation("alarm0", "very_safe_password", true));
         boolean successDeactivated = alarmHandler
                 .processEvent(new AlarmActivation("alarm0", "not_very_safe_password", false));
-        boolean isEmergency = alarm.getAlarmState() instanceof EmergencyState;
+        boolean isEmergency = alarm.isEmergency();
         boolean successDeactivated1 = alarmHandler
                 .processEvent(new AlarmActivation("alarm0", "not_very_safe_password", false));
-        boolean isEmergency1 = alarm.getAlarmState() instanceof EmergencyState;
+        boolean isEmergency1 = alarm.isEmergency();
 
         boolean successDeactivated2 = alarmHandler
                 .processEvent(new AlarmActivation("alarm0", "very_safe_password", false));
-        boolean isEmergency2 = alarm.getAlarmState() instanceof EmergencyState;
+        boolean isEmergency2 = alarm.isEmergency();
 
 
         // then

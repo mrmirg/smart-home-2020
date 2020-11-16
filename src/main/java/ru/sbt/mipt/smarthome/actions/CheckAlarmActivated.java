@@ -20,8 +20,8 @@ public class CheckAlarmActivated implements Action {
     // returns true only if component is alarm and alarm is activated (or emergency)
     public boolean act(HomeComponent component) {
         if (component instanceof Alarm && component.getId().equals(alarmId)) {
-            return ((Alarm) component).getAlarmState() instanceof ActivatedState ||
-                    ((Alarm) component).getAlarmState() instanceof EmergencyState;
+            return ((Alarm) component).isActivated() ||
+                    ((Alarm) component).isEmergency();
         }
         return false;
     }

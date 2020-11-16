@@ -19,17 +19,8 @@ public class EventHandlerAdapter implements EventHandler {
 
     @Override
     public void handleEvent(CCSensorEvent event) {
-
-        String id = event.getObjectId();
-        switch (event.getEventType()) {
-            case "LightIsOn"    : handler.processEvent(new LightOn(id, true));    break;
-            case "LightIsOff"   : handler.processEvent(new LightOn(id, false));   break;
-            case "DoorIsOpen"   : handler.processEvent(new DoorOpened(id, true)); break;
-            case "DoorIsClosed" : handler.processEvent(new DoorOpened(id, false)); break;
-            case "DoorIsLocked" : handler.processEvent(new DoorLocked(id, true)); break;
-            case "DoorIsUnlocked" : handler.processEvent(new DoorLocked(id, false)); break;
-
-            default: throw new RuntimeException("Illegal event type");
-        }
+        handler.processEvent(
+                EventFactory.makeSensorEvent(event)
+        );
     }
 }

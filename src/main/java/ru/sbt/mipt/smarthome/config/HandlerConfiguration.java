@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import ru.sbt.mipt.smarthome.components.SmartHome;
+import ru.sbt.mipt.smarthome.components.alarm.Alarm;
 import ru.sbt.mipt.smarthome.handlers.*;
 
 import java.io.IOException;
@@ -14,46 +16,48 @@ import java.io.IOException;
 @Configuration
 @Import({SmartHomeConfiguration.class})
 public class HandlerConfiguration {
-    @Autowired private SmartHomeConfiguration smartHomeConfiguration;
-
 
     @Bean
-    public EventHandler doorHandler() throws IOException {
+    public EventHandler doorHandler(SmartHome smartHome, Alarm alarm) throws IOException {
         return new EventHandlerAdapter(
                 new AlarmDecorator(
-                        smartHomeConfiguration.smartHome(),
-                        smartHomeConfiguration.alarm().getId(),
-                        new DoorHandler(smartHomeConfiguration.smartHome())
+                        smartHome,
+                        alarm.getId(),
+                        new DoorHandler(smartHome)
                 ));
     }
 
 
     @Bean
-    public EventHandler lightHandler() throws IOException {
+    public EventHandler lightHandler(SmartHome smartHome, Alarm alarm) throws IOException {
         return new EventHandlerAdapter(
                 new AlarmDecorator(
-                        smartHomeConfiguration.smartHome(),
-                        smartHomeConfiguration.alarm().getId(),
-                        new LightHandler(smartHomeConfiguration.smartHome())
+                        smartHome,
+                        alarm.getId(),
+                        new LightHandler(smartHome)
                 ));
     }
 
 
     @Bean
-    public EventHandler alarmHandler() throws IOException {
+    public EventHandler alarmHandler(SmartHome smartHome, Alarm alarm) throws IOException {
         return new EventHandlerAdapter(
-                new AlarmHandler(smartHomeConfiguration.smartHome())
+                new AlarmDecorator(
+                        smartHome,
+                        alarm.getId(),
+                        new AlarmHandler(smartHome)
+                )
         );
     }
 
 
     @Bean
-    public EventHandler halldoorHandler() throws IOException {
+    public EventHandler halldoorHandler(SmartHome smartHome, Alarm alarm) throws IOException {
         return new EventHandlerAdapter(
                 new AlarmDecorator(
-                        smartHomeConfiguration.smartHome(),
-                        smartHomeConfiguration.alarm().getId(),
-                        new HalldoorHandler(smartHomeConfiguration.smartHome())
+                        smartHome,
+                        alarm.getId(),
+                        new HalldoorHandler(smartHome)
                 )
         );
     }

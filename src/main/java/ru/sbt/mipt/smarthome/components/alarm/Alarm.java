@@ -13,6 +13,19 @@ public class Alarm implements HomeComponent {
     }
 
 
+    public boolean isActivated() {
+        return alarmState instanceof ActivatedState;
+    }
+
+
+    public boolean isEmergency() {
+        return alarmState instanceof EmergencyState;
+    }
+
+
+    public boolean isDeactivated() {
+        return alarmState instanceof DeactivatedState;
+    }
 
 
     void setFingerPrint(String fingerPrint) {
@@ -23,14 +36,24 @@ public class Alarm implements HomeComponent {
     }
 
 
-    public AlarmState getState() {
-        return alarmState;
-    }
-
-
     public Alarm(String id) {
         this.alarmState = new DeactivatedState(this);
         this.id = id;
+    }
+
+
+    public boolean setActivated(String fingerprint) {
+        return getAlarmState().setActivated(fingerprint);
+    }
+
+
+    public boolean setEmergency() {
+        return getAlarmState().setEmergency();
+    }
+
+
+    public boolean setDeactivated(String fingerprint) {
+        return getAlarmState().setDeactivated(fingerprint);
     }
 
 
@@ -39,7 +62,7 @@ public class Alarm implements HomeComponent {
     }
 
 
-    public AlarmState getAlarmState() {
+    AlarmState getAlarmState() {
         return alarmState;
     }
 
