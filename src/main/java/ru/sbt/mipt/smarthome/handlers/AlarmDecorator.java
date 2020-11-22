@@ -1,7 +1,10 @@
 package ru.sbt.mipt.smarthome.handlers;
 
 
+import ru.sbt.mipt.smarthome.Notifier;
+import ru.sbt.mipt.smarthome.SmsNotifier;
 import ru.sbt.mipt.smarthome.actions.CheckAlarmActivated;
+import ru.sbt.mipt.smarthome.actions.CheckAlarmEmergency;
 import ru.sbt.mipt.smarthome.actions.SetAlarmEmergency;
 import ru.sbt.mipt.smarthome.components.SmartHome;
 import ru.sbt.mipt.smarthome.events.AlarmActivation;
@@ -9,17 +12,14 @@ import ru.sbt.mipt.smarthome.events.SensorEvent;
 
 
 public class AlarmDecorator implements SensorEventHandler {
-    private final SensorEventHandler handler;
+    private final SensorEventHandler compositeHandler;
     private final SmartHome smartHome;
     private final String alarmId;
-    private static boolean muteEvents = false;
+    private final Notifier notifier = new SmsNotifier();
 
 
     public AlarmDecorator(SmartHome smartHome, String alarmId, SensorEventHandler handler) {
-        if (handler == null) {
-            throw new IllegalArgumentException("Handler must be non null");
-        }
-        this.handler = handler;
+        this.compositeHandler = handler;
         this.smartHome = smartHome;
         this.alarmId = alarmId;
     }
@@ -28,20 +28,18 @@ public class AlarmDecorator implements SensorEventHandler {
     @Override
     public boolean processEvent(SensorEvent event) {
         if (event instanceof AlarmActivation
-                && handler instanceof AlarmHandler
-                && handler.processEvent(event)) {
-            muteEvents = false;
-            return true;
+            && !((AlarmActivation) event).isActivation()) {
+            return compositeHandler.processEvent(event);
         }
-        if (muteEvents) {
-            return false;
-        }
+
         if (smartHome.applyAction(new CheckAlarmActivated(alarmId))) {
             smartHome.applyAction(new SetAlarmEmergency(alarmId));
-            System.out.println("Alarm " + alarmId + " | Illegal access detected! Sending sms..");
-            muteEvents = true;
+            notifier.doNotify("Illegal access detected! Emergency state activated.");
             return false;
         }
-        return handler.processEvent(event);
+        if (!smartHome.applyAction(new CheckAlarmEmergency(alarmId))) {
+            return compositeHandler.processEvent(event);
+        }
+        return false;
     }
 }

@@ -26,17 +26,17 @@ public class AlarmHandler implements SensorEventHandler {
                     new SetAlarmActivated(
                             event.getComponentId(),
                             fingerPrint,
-                            alarmActivation.isActivated()
+                            alarmActivation.isActivation()
                     )
             );
 
             if (success) {
                 System.out.println("Alarm "
                         + event.getComponentId() + " is "
-                        + (alarmActivation.isActivated() ? "activated." : "deactivated."));
+                        + (alarmActivation.isActivation() ? "activated." : "deactivated."));
             } else {
                 System.out.println("Failed to "
-                        + (alarmActivation.isActivated() ? "activate" : "deactivate") +
+                        + (alarmActivation.isActivation() ? "activate" : "deactivate") +
                         " alarm " +
                         event.getComponentId());
             }

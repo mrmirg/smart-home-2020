@@ -3,24 +3,28 @@ package ru.sbt.mipt.smarthome.handlers;
 
 import com.coolcompany.smarthome.events.CCSensorEvent;
 import com.coolcompany.smarthome.events.EventHandler;
-import ru.sbt.mipt.smarthome.events.DoorLocked;
-import ru.sbt.mipt.smarthome.events.DoorOpened;
-import ru.sbt.mipt.smarthome.events.LightOn;
+import ru.sbt.mipt.smarthome.events.SensorEvent;
+
+import java.util.function.Function;
 
 
 public class EventHandlerAdapter implements EventHandler {
     private final SensorEventHandler handler;
+    private final Function<CCSensorEvent, SensorEvent> eventMapping;
 
 
-    public EventHandlerAdapter(SensorEventHandler handler) {
+    public EventHandlerAdapter(
+            SensorEventHandler handler,
+            Function<CCSensorEvent, SensorEvent> eventMapping) {
         this.handler = handler;
+        this.eventMapping = eventMapping;
     }
 
 
     @Override
     public void handleEvent(CCSensorEvent event) {
         handler.processEvent(
-                EventFactory.makeSensorEvent(event)
+                eventMapping.apply(event)
         );
     }
 }

@@ -17,7 +17,7 @@ public class AlarmActivation implements SensorEvent {
     }
 
 
-    public boolean isActivated() {
+    public boolean isActivation() {
         return activated;
     }
 
