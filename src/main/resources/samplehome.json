@@ -1,0 +1,132 @@
+{
+  "components": [
+    {
+      "HomeComponent": "ru.sbt.mipt.smarthome.components.Room",
+      "properties": {
+        "components": [
+          {
+            "HomeComponent": "ru.sbt.mipt.smarthome.components.Light",
+            "properties": {
+              "isOn": false,
+              "id": "1"
+            }
+          },
+          {
+            "HomeComponent": "ru.sbt.mipt.smarthome.components.Light",
+            "properties": {
+              "isOn": true,
+              "id": "2"
+            }
+          },
+          {
+            "HomeComponent": "ru.sbt.mipt.smarthome.components.Door",
+            "properties": {
+              "id": "3",
+              "isOpen": false
+            }
+          }
+        ],
+        "name": "kitchen",
+        "id": "kitchen_0"
+      }
+    },
+    {
+      "HomeComponent": "ru.sbt.mipt.smarthome.components.Room",
+      "properties": {
+        "components": [
+          {
+            "HomeComponent": "ru.sbt.mipt.smarthome.components.Light",
+            "properties": {
+              "isOn": true,
+              "id": "4"
+            }
+          },
+          {
+            "HomeComponent": "ru.sbt.mipt.smarthome.components.Door",
+            "properties": {
+              "id": "5",
+              "isOpen": false
+            }
+          }
+        ],
+        "name": "bathroom",
+        "id": "bathroom0234"
+      }
+    },
+    {
+      "HomeComponent": "ru.sbt.mipt.smarthome.components.Room",
+      "properties": {
+        "components": [
+          {
+            "HomeComponent": "ru.sbt.mipt.smarthome.components.Light",
+            "properties": {
+              "isOn": false,
+              "id": "6"
+            }
+          },
+          {
+            "HomeComponent": "ru.sbt.mipt.smarthome.components.Light",
+            "properties": {
+              "isOn": false,
+              "id": "7"
+            }
+          },
+          {
+            "HomeComponent": "ru.sbt.mipt.smarthome.components.Light",
+            "properties": {
+              "isOn": false,
+              "id": "8"
+            }
+          },
+          {
+            "HomeComponent": "ru.sbt.mipt.smarthome.components.Door",
+            "properties": {
+              "id": "9",
+              "isOpen": false
+            }
+          }
+        ],
+        "name": "bedroom",
+        "id": "bedroom12"
+      }
+    },
+    {
+      "HomeComponent": "ru.sbt.mipt.smarthome.components.Room",
+      "properties": {
+        "components": [
+          {
+            "HomeComponent": "ru.sbt.mipt.smarthome.components.Light",
+            "properties": {
+              "isOn": false,
+              "id": "10"
+            }
+          },
+          {
+            "HomeComponent": "ru.sbt.mipt.smarthome.components.Light",
+            "properties": {
+              "isOn": false,
+              "id": "11"
+            }
+          },
+          {
+            "HomeComponent": "ru.sbt.mipt.smarthome.components.Light",
+            "properties": {
+              "isOn": false,
+              "id": "12"
+            }
+          },
+          {
+            "HomeComponent": "ru.sbt.mipt.smarthome.components.Door",
+            "properties": {
+              "id": "13",
+              "isOpen": false
+            }
+          }
+        ],
+        "name": "hall",
+        "id": "hall007"
+      }
+    }
+  ],
+  "id": "super_sanya_smarthome"
+}
